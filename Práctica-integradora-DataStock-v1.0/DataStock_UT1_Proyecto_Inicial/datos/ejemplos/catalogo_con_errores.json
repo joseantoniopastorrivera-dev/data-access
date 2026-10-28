@@ -1,0 +1,7 @@
+{
+  "productos": [
+    {"codigo":"TEC-004","nombre":"Teclado mecánico","precio":-5,"stock":8,"categoriaId":1,"proveedorId":1},
+    {"codigo":"CAB-005","nombre":"Cable USB","precio":7.99,"stock":30,"categoriaId":1,"proveedorId":1},
+    {"codigo":"CAB-005","nombre":"Cable duplicado","precio":8.99,"stock":10,"categoriaId":1,"proveedorId":1}
+  ]
+}
