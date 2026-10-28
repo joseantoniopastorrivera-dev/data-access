@@ -1,5 +1,6 @@
 package es.iesisidra.datastock.ui;
 
+import es.iesisidra.datastock.ficheros.ExploradorRutas;
 import es.iesisidra.datastock.servicio.Inventario;
 import es.iesisidra.datastock.util.ColoresConsola;
 import es.iesisidra.datastock.util.LectorConsola;
@@ -12,6 +13,7 @@ import es.iesisidra.datastock.util.LectorConsola;
  */
 public class MenuPrincipal {
     private final Inventario inventario;
+    private final ExploradorRutas explorador = new ExploradorRutas();
 
     /** @param inventario colección común de productos de esta ejecución. */
     public MenuPrincipal(Inventario inventario) { this.inventario = inventario; }
@@ -30,7 +32,7 @@ public class MenuPrincipal {
             System.out.println("0. Salir");
             opcion = LectorConsola.leerOpcion("Selecciona una opción: ", 0, 6);
             switch (opcion) {
-                case 1 -> pendiente("RF-FIC-01 · Explorar ficheros y directorios");
+                case 1 -> explorarRuta();
                 case 2 -> pendiente("RF-FIC-02 · Importar productos desde JSON");
                 case 3 -> pendiente("RF-FIC-03 · Importar productos desde XML");
                 case 4 -> menuConsultas();
@@ -48,6 +50,14 @@ public class MenuPrincipal {
         System.out.println(ColoresConsola.pintar("                 FASE 1 - UT1", ColoresConsola.CIAN));
         System.out.println(ColoresConsola.pintar("================================================", ColoresConsola.CIAN));
         System.out.println(ColoresConsola.pintar("Productos en memoria: " + inventario.getProductos().size(), ColoresConsola.GRIS));
+    }
+
+    /** RF-FIC-01: pide la ruta y delega la exploración en ExploradorRutas. */
+    private void explorarRuta() {
+        System.out.println("\n===== EXPLORAR RUTA =====");
+        String ruta = LectorConsola.leerTexto("Ruta: ");
+        explorador.explorar(ruta);
+        LectorConsola.pausar();
     }
 
     private void menuConsultas() {
