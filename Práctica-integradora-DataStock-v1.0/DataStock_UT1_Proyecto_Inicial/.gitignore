@@ -1,0 +1,9 @@
+target/
+*.class
+.idea/
+*.iml
+.vscode/
+.DS_Store
+# Salidas generadas por el alumnado (no se ignoran los ejemplos de entrada)
+datos/salidas/*
+!datos/salidas/.gitkeep
