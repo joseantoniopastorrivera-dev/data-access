@@ -16,4 +16,4 @@ Apuntes en PDF por unidad y la práctica integradora DataStock.
 ## Notas
 - Práctica individual y evaluable que crece en UT1 (ficheros), UT2 (JDBC) y UT3 (componentes): explica las decisiones para que el alumno pueda defenderlas, y no rompas lo de unidades anteriores.
 - Los menús marcados `[PENDIENTE]` son lo que falta por implementar.
-- El proyecto aún no está en git (sin seguimiento); no subas `target/`.
+- El proyecto aún no está en git (sin seguimiento); `target/` ya está en `.gitignore`.
