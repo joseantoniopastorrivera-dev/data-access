@@ -22,9 +22,9 @@ import java.util.List;
 
 /**
  * Presentación de menús y navegación de la primera fase de DataStock.
- * <p>Los métodos marcados TODO son puntos de partida, NO soluciones de los
- * requisitos. El alumnado deberá delegar el acceso a ficheros, la validación
- * y el procesamiento en métodos o clases independientes.</p>
+ * <p>Esta clase solo muestra opciones, pide datos y presenta resultados. El
+ * acceso a ficheros, la validación y el procesamiento están delegados en los
+ * paquetes {@code ficheros}, {@code validacion} y {@code servicio}.</p>
  */
 public class MenuPrincipal {
     private final Inventario inventario;
