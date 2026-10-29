@@ -1,0 +1,9 @@
+{
+  "productos": [
+    {"codigo":"ALT-201","nombre":"Altavoces USB","precio":18.50,"stock":15,"categoriaId":3,"proveedorId":1},
+    {"codigo":"AUR-202","nombre":"Auriculares con micrófono","precio":27.95,"stock":9,"categoriaId":3,"proveedorId":1},
+    {"codigo":"WEB-203","nombre":"Webcam HD","precio":39.00,"stock":7,"categoriaId":3,"proveedorId":2},
+    {"codigo":"ALT-204","nombre":"Altavoz portátil","precio":-12.00,"stock":3,"categoriaId":3,"proveedorId":2},
+    {"codigo":"","nombre":"Producto sin código","precio":5.00,"stock":1,"categoriaId":3,"proveedorId":1}
+  ]
+}
