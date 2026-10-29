@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo>
+  <producto>
+    <codigo>MON-103</codigo>
+    <nombre>Monitor 27 pulgadas</nombre>
+    <precio>219.99</precio>
+    <stock>4</stock>
+    <categoriaId>2</categoriaId>
+    <proveedorId>2</proveedorId>
+  </producto>
+  <producto>
+    <codigo>RAT-102</codigo>
+    <nombre>Ratón ergonómico</nombre>
+    <precio>32.00</precio>
+    <stock>6</stock>
+    <categoriaId>1</categoriaId>
+    <proveedorId>2</proveedorId>
+  </producto>
+  <producto>
+    <codigo>TEC-101</codigo>
+    <nombre>Teclado compacto</nombre>
+    <precio>24.90</precio>
+    <stock>10</stock>
+    <categoriaId>1</categoriaId>
+    <proveedorId>1</proveedorId>
+  </producto>
+</catalogo>
