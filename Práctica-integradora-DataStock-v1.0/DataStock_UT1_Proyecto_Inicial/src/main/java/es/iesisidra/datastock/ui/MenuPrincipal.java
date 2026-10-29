@@ -1,6 +1,9 @@
 package es.iesisidra.datastock.ui;
 
 import es.iesisidra.datastock.ficheros.ExploradorRutas;
+import es.iesisidra.datastock.ficheros.ImportacionException;
+import es.iesisidra.datastock.ficheros.ImportadorJson;
+import es.iesisidra.datastock.ficheros.ResultadoImportacion;
 import es.iesisidra.datastock.servicio.Inventario;
 import es.iesisidra.datastock.util.ColoresConsola;
 import es.iesisidra.datastock.util.LectorConsola;
@@ -14,6 +17,7 @@ import es.iesisidra.datastock.util.LectorConsola;
 public class MenuPrincipal {
     private final Inventario inventario;
     private final ExploradorRutas explorador = new ExploradorRutas();
+    private final ImportadorJson importadorJson = new ImportadorJson();
 
     /** @param inventario colección común de productos de esta ejecución. */
     public MenuPrincipal(Inventario inventario) { this.inventario = inventario; }
@@ -33,7 +37,7 @@ public class MenuPrincipal {
             opcion = LectorConsola.leerOpcion("Selecciona una opción: ", 0, 6);
             switch (opcion) {
                 case 1 -> explorarRuta();
-                case 2 -> pendiente("RF-FIC-02 · Importar productos desde JSON");
+                case 2 -> importarJson();
                 case 3 -> pendiente("RF-FIC-03 · Importar productos desde XML");
                 case 4 -> menuConsultas();
                 case 5 -> menuExportaciones();
@@ -58,6 +62,35 @@ public class MenuPrincipal {
         String ruta = LectorConsola.leerTexto("Ruta: ");
         explorador.explorar(ruta);
         LectorConsola.pausar();
+    }
+
+    /** RF-FIC-02: pide la ruta, delega la importación y muestra el resumen. */
+    private void importarJson() {
+        System.out.println("\n===== IMPORTAR JSON =====");
+        String ruta = LectorConsola.leerTexto("Ruta: ");
+        try {
+            ResultadoImportacion resultado = importadorJson.importar(ruta, inventario);
+            mostrarResumen(resultado);
+        } catch (ImportacionException ex) {
+            System.out.println(ColoresConsola.pintar("Importación cancelada: " + ex.getMessage(), ColoresConsola.ROJO));
+            System.out.println("No se ha añadido ningún producto al inventario.");
+        }
+        LectorConsola.pausar();
+    }
+
+    /** Muestra el resumen común de una importación (JSON o XML). */
+    private void mostrarResumen(ResultadoImportacion resultado) {
+        System.out.println("Productos encontrados: " + resultado.getEncontrados());
+        System.out.println("Importados: " + resultado.getImportados() + " | Rechazados: " + resultado.getRechazados());
+        if (resultado.getIncidencias().isEmpty()) {
+            System.out.println(ColoresConsola.pintar("Importación finalizada.", ColoresConsola.VERDE));
+        } else {
+            System.out.println("INCIDENCIAS:");
+            for (String incidencia : resultado.getIncidencias()) {
+                System.out.println("  - " + incidencia);
+            }
+            System.out.println(ColoresConsola.pintar("Importación finalizada con incidencias.", ColoresConsola.AMARILLO));
+        }
     }
 
     private void menuConsultas() {
