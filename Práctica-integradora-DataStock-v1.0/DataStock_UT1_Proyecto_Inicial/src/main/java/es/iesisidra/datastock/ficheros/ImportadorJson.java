@@ -9,20 +9,13 @@ import com.google.gson.Strictness;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.MalformedJsonException;
-import es.iesisidra.datastock.modelo.Producto;
 import es.iesisidra.datastock.servicio.Inventario;
 import es.iesisidra.datastock.validacion.DatosProducto;
-import es.iesisidra.datastock.validacion.ValidadorProducto;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,8 +32,6 @@ public class ImportadorJson {
     private static final String CLAVE_PRODUCTOS = "productos";
     private static final Pattern POSICION_GSON = Pattern.compile("line (\\d+) column (\\d+)");
 
-    private final ValidadorProducto validador = new ValidadorProducto();
-
     /**
      * @param textoRuta  ruta del fichero escrita por el usuario
      * @param inventario colección común donde se añaden los productos válidos
@@ -48,47 +39,21 @@ public class ImportadorJson {
      * @throws ImportacionException si el documento entero no puede procesarse; el inventario no cambia
      */
     public ResultadoImportacion importar(String textoRuta, Inventario inventario) throws ImportacionException {
-        Path ruta = comprobarRuta(textoRuta);
+        Path ruta = ComprobadorRutas.ficheroLegible(textoRuta);
         JsonArray productos = leerArrayProductos(ruta);
 
         // A partir de aquí el documento es válido: cada producto se trata por separado.
-        ResultadoImportacion resultado = new ResultadoImportacion();
-        Set<String> codigosDelFichero = new HashSet<>();
+        ProcesoImportacion proceso = new ProcesoImportacion(inventario);
         for (int i = 0; i < productos.size(); i++) {
             int posicion = i + 1;
-            resultado.sumarEncontrado();
             JsonElement elemento = productos.get(i);
-            if (!elemento.isJsonObject()) {
-                resultado.anadirIncidencia("Producto " + posicion + ": no es un objeto JSON");
-                continue;
+            if (elemento.isJsonObject()) {
+                proceso.procesar(extraerDatos(posicion, elemento.getAsJsonObject()));
+            } else {
+                proceso.rechazar(posicion, "no es un objeto JSON");
             }
-            DatosProducto datos = extraerDatos(posicion, elemento.getAsJsonObject());
-            procesar(datos, inventario, codigosDelFichero, resultado);
         }
-        return resultado;
-    }
-
-    /** Comprueba que la ruta existe, es un fichero regular y se puede leer. */
-    private Path comprobarRuta(String textoRuta) throws ImportacionException {
-        if (textoRuta == null || textoRuta.isBlank()) {
-            throw new ImportacionException("Debes indicar la ruta del fichero.");
-        }
-        Path ruta;
-        try {
-            ruta = Path.of(textoRuta.trim());
-        } catch (InvalidPathException ex) {
-            throw new ImportacionException("La ruta contiene caracteres no válidos: " + ex.getMessage(), ex);
-        }
-        if (!Files.exists(ruta)) {
-            throw new ImportacionException("El fichero no existe: " + ruta.toAbsolutePath());
-        }
-        if (!Files.isRegularFile(ruta)) {
-            throw new ImportacionException("La ruta no es un fichero (¿es un directorio?): " + ruta.toAbsolutePath());
-        }
-        if (!Files.isReadable(ruta)) {
-            throw new ImportacionException("No tienes permisos para leer el fichero: " + ruta.toAbsolutePath());
-        }
-        return ruta;
+        return proceso.getResultado();
     }
 
     /** Lee el JSON en modo estricto y devuelve el array "productos" de la raíz. */
@@ -144,31 +109,5 @@ public class ImportadorJson {
             return null;
         }
         return valor.getAsString();
-    }
-
-    /** Valida un producto, comprueba duplicados y lo añade o registra la incidencia. */
-    private void procesar(DatosProducto datos, Inventario inventario,
-                          Set<String> codigosDelFichero, ResultadoImportacion resultado) {
-        List<String> errores = new ArrayList<>();
-        Producto producto = validador.validar(datos, errores);
-
-        if (producto != null && codigosDelFichero.contains(producto.getCodigo())) {
-            errores.add("código duplicado dentro del mismo fichero");
-        } else if (producto != null && !inventario.agregar(producto)) {
-            errores.add("código duplicado: ya existe en el inventario");
-        }
-
-        if (errores.isEmpty()) {
-            codigosDelFichero.add(producto.getCodigo());
-            resultado.sumarImportado();
-        } else {
-            resultado.anadirIncidencia(identificar(datos) + ": " + String.join("; ", errores));
-        }
-    }
-
-    /** "Producto 3 (CAB-005)", o solo "Producto 3" si no tiene código. */
-    private String identificar(DatosProducto datos) {
-        String codigo = ValidadorProducto.normalizarCodigo(datos.codigo());
-        return "Producto " + datos.posicion() + (codigo == null ? "" : " (" + codigo + ")");
     }
 }
