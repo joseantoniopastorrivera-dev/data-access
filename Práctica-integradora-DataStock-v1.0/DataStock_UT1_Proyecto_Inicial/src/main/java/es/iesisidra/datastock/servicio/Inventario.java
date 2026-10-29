@@ -19,4 +19,28 @@ public class Inventario {
      * reglas del enunciado antes de añadir o sustituir elementos.</p>
      */
     public List<Producto> getProductos() { return productos; }
+
+    /**
+     * Indica si ya existe un producto con ese código, sin distinguir mayúsculas
+     * y sin tener en cuenta los espacios extremos.
+     */
+    public boolean existeCodigo(String codigo) {
+        if (codigo == null) {
+            return false;
+        }
+        String buscado = codigo.trim();
+        return productos.stream().anyMatch(p -> p.getCodigo().equalsIgnoreCase(buscado));
+    }
+
+    /**
+     * Añade un producto ya validado. Rechaza los duplicados como última barrera.
+     * @return true si se añadió; false si el código ya existía
+     */
+    public boolean agregar(Producto producto) {
+        if (producto == null || existeCodigo(producto.getCodigo())) {
+            return false;
+        }
+        productos.add(producto);
+        return true;
+    }
 }
