@@ -1,0 +1,8 @@
+Ficheros de prueba de RF-FIC-08 (AccesoAleatorioActividad):
+- catalogo_stock.json: cuatro productos que se cargan en memoria para generar el binario.
+  Ordenados por código quedan ALT-001, CAB-002, MON-003 (posición 2, stock 8) y TEC-004.
+- stock_tras_modificar.bin: resultado de generar el fichero (144 bytes = 4 × 36) y cambiar
+  el stock de la posición 2 de 8 a 15. Comparado con el fichero original solo cambia el byte 107,
+  que está dentro del campo stock del registro 2 (bytes 104-107 = 2 × 36 + 32 … + 35).
+- tamano_invalido.bin: 100 bytes a cero; como 100 no es múltiplo de 36 se rechaza (CP-RAF-05).
+Formato de cada registro: código (12 char = 24 bytes) + precio (double, 8 bytes) + stock (int, 4 bytes).
