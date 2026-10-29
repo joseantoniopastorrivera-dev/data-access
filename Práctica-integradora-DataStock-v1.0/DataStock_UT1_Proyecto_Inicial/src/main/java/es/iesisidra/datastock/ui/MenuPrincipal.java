@@ -2,7 +2,9 @@ package es.iesisidra.datastock.ui;
 
 import es.iesisidra.datastock.ficheros.ExploradorRutas;
 import es.iesisidra.datastock.ficheros.ImportacionException;
+import es.iesisidra.datastock.ficheros.ImportadorCatalogo;
 import es.iesisidra.datastock.ficheros.ImportadorJson;
+import es.iesisidra.datastock.ficheros.ImportadorXml;
 import es.iesisidra.datastock.ficheros.ResultadoImportacion;
 import es.iesisidra.datastock.servicio.Inventario;
 import es.iesisidra.datastock.util.ColoresConsola;
@@ -17,7 +19,8 @@ import es.iesisidra.datastock.util.LectorConsola;
 public class MenuPrincipal {
     private final Inventario inventario;
     private final ExploradorRutas explorador = new ExploradorRutas();
-    private final ImportadorJson importadorJson = new ImportadorJson();
+    private final ImportadorCatalogo importadorJson = new ImportadorJson();
+    private final ImportadorCatalogo importadorXml = new ImportadorXml();
 
     /** @param inventario colección común de productos de esta ejecución. */
     public MenuPrincipal(Inventario inventario) { this.inventario = inventario; }
@@ -37,8 +40,8 @@ public class MenuPrincipal {
             opcion = LectorConsola.leerOpcion("Selecciona una opción: ", 0, 6);
             switch (opcion) {
                 case 1 -> explorarRuta();
-                case 2 -> importarJson();
-                case 3 -> pendiente("RF-FIC-03 · Importar productos desde XML");
+                case 2 -> importar("JSON", importadorJson);
+                case 3 -> importar("XML", importadorXml);
                 case 4 -> menuConsultas();
                 case 5 -> menuExportaciones();
                 case 6 -> menuSerializacion();
@@ -64,12 +67,16 @@ public class MenuPrincipal {
         LectorConsola.pausar();
     }
 
-    /** RF-FIC-02: pide la ruta, delega la importación y muestra el resumen. */
-    private void importarJson() {
-        System.out.println("\n===== IMPORTAR JSON =====");
+    /**
+     * RF-FIC-02 y RF-FIC-03: pide la ruta, delega la importación y muestra el resumen.
+     * @param formato   texto para el título ("JSON" o "XML")
+     * @param importador objeto que sabe leer ese formato
+     */
+    private void importar(String formato, ImportadorCatalogo importador) {
+        System.out.println("\n===== IMPORTAR " + formato + " =====");
         String ruta = LectorConsola.leerTexto("Ruta: ");
         try {
-            ResultadoImportacion resultado = importadorJson.importar(ruta, inventario);
+            ResultadoImportacion resultado = importador.importar(ruta, inventario);
             mostrarResumen(resultado);
         } catch (ImportacionException ex) {
             System.out.println(ColoresConsola.pintar("Importación cancelada: " + ex.getMessage(), ColoresConsola.ROJO));

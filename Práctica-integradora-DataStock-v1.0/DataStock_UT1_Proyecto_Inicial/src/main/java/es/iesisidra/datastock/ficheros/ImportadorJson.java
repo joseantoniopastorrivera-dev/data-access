@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  * un solo producto con un tipo incorrecto haría fallar todo el documento, y el
  * enunciado exige importar los válidos y explicar cada rechazo.</p>
  */
-public class ImportadorJson {
+public class ImportadorJson implements ImportadorCatalogo {
     private static final String CLAVE_PRODUCTOS = "productos";
     private static final Pattern POSICION_GSON = Pattern.compile("line (\\d+) column (\\d+)");
 
@@ -38,6 +38,7 @@ public class ImportadorJson {
      * @return resumen de la importación (el documento se pudo leer)
      * @throws ImportacionException si el documento entero no puede procesarse; el inventario no cambia
      */
+    @Override
     public ResultadoImportacion importar(String textoRuta, Inventario inventario) throws ImportacionException {
         Path ruta = ComprobadorRutas.ficheroLegible(textoRuta);
         JsonArray productos = leerArrayProductos(ruta);
