@@ -1,6 +1,11 @@
 package es.iesisidra.datastock.ui;
 
+import es.iesisidra.datastock.ficheros.ComprobadorRutas;
 import es.iesisidra.datastock.ficheros.ExploradorRutas;
+import es.iesisidra.datastock.ficheros.ExportacionException;
+import es.iesisidra.datastock.ficheros.ExportadorCatalogo;
+import es.iesisidra.datastock.ficheros.ExportadorJson;
+import es.iesisidra.datastock.ficheros.ExportadorXml;
 import es.iesisidra.datastock.ficheros.ImportacionException;
 import es.iesisidra.datastock.ficheros.ImportadorCatalogo;
 import es.iesisidra.datastock.ficheros.ImportadorJson;
@@ -10,6 +15,8 @@ import es.iesisidra.datastock.modelo.Producto;
 import es.iesisidra.datastock.servicio.Inventario;
 import es.iesisidra.datastock.util.ColoresConsola;
 import es.iesisidra.datastock.util.LectorConsola;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -23,6 +30,8 @@ public class MenuPrincipal {
     private final ExploradorRutas explorador = new ExploradorRutas();
     private final ImportadorCatalogo importadorJson = new ImportadorJson();
     private final ImportadorCatalogo importadorXml = new ImportadorXml();
+    private final ExportadorCatalogo exportadorJson = new ExportadorJson();
+    private final ExportadorCatalogo exportadorXml = new ExportadorXml();
 
     /** @param inventario colección común de productos de esta ejecución. */
     public MenuPrincipal(Inventario inventario) { this.inventario = inventario; }
@@ -212,12 +221,46 @@ public class MenuPrincipal {
             System.out.println("0. Volver al menú principal");
             opcion = LectorConsola.leerOpcion("Selecciona una opción: ", 0, 2);
             switch (opcion) {
-                case 1 -> pendiente("RF-FIC-05 · Exportar JSON");
-                case 2 -> pendiente("RF-FIC-05 · Exportar XML");
+                case 1 -> exportar("JSON", exportadorJson);
+                case 2 -> exportar("XML", exportadorXml);
                 case 0 -> { }
                 default -> throw new IllegalStateException("Opción inesperada");
             }
         } while (opcion != 0);
+    }
+
+    /**
+     * RF-FIC-05: pide la ruta, confirma la sobrescritura y delega la exportación.
+     * @param formato    texto para los mensajes ("JSON" o "XML")
+     * @param exportador objeto que sabe escribir ese formato
+     */
+    private void exportar(String formato, ExportadorCatalogo exportador) {
+        System.out.println("\n===== EXPORTAR " + formato + " =====");
+        if (avisarSiVacio()) {
+            return;
+        }
+        String texto = LectorConsola.leerTexto("Ruta de destino: ");
+        try {
+            Path destino = ComprobadorRutas.destinoEscribible(texto);
+            if (!confirmarSobrescritura(destino)) {
+                System.out.println("Exportación cancelada. El fichero existente no se ha modificado.");
+            } else {
+                List<Producto> productos = inventario.listarOrdenado();
+                exportador.exportar(productos, destino);
+                System.out.println(ColoresConsola.pintar("Fichero generado correctamente.", ColoresConsola.VERDE));
+                System.out.println("Ruta: " + destino.toAbsolutePath());
+                System.out.println("Formato: " + formato + " | Productos exportados: " + productos.size());
+            }
+        } catch (ExportacionException ex) {
+            System.out.println(ColoresConsola.pintar("Exportación cancelada: " + ex.getMessage(), ColoresConsola.ROJO));
+        }
+        LectorConsola.pausar();
+    }
+
+    /** @return true si el fichero no existe o el usuario acepta sobrescribirlo */
+    private boolean confirmarSobrescritura(Path destino) {
+        return !Files.exists(destino)
+                || LectorConsola.confirmar("El fichero " + destino.getFileName() + " ya existe. ¿Sobrescribirlo?");
     }
 
     private void menuSerializacion() {
