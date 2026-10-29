@@ -6,9 +6,11 @@ import es.iesisidra.datastock.ficheros.ImportadorCatalogo;
 import es.iesisidra.datastock.ficheros.ImportadorJson;
 import es.iesisidra.datastock.ficheros.ImportadorXml;
 import es.iesisidra.datastock.ficheros.ResultadoImportacion;
+import es.iesisidra.datastock.modelo.Producto;
 import es.iesisidra.datastock.servicio.Inventario;
 import es.iesisidra.datastock.util.ColoresConsola;
 import es.iesisidra.datastock.util.LectorConsola;
+import java.util.List;
 
 /**
  * Presentación de menús y navegación de la primera fase de DataStock.
@@ -56,7 +58,7 @@ public class MenuPrincipal {
         System.out.println(ColoresConsola.pintar("         DATASTOCK - GESTIÓN DE INVENTARIO", ColoresConsola.NEGRITA));
         System.out.println(ColoresConsola.pintar("                 FASE 1 - UT1", ColoresConsola.CIAN));
         System.out.println(ColoresConsola.pintar("================================================", ColoresConsola.CIAN));
-        System.out.println(ColoresConsola.pintar("Productos en memoria: " + inventario.getProductos().size(), ColoresConsola.GRIS));
+        System.out.println(ColoresConsola.pintar("Productos en memoria: " + inventario.tamano(), ColoresConsola.GRIS));
     }
 
     /** RF-FIC-01: pide la ruta y delega la exploración en ExploradorRutas. */
@@ -110,13 +112,95 @@ public class MenuPrincipal {
             System.out.println("0. Volver al menú principal");
             opcion = LectorConsola.leerOpcion("Selecciona una opción: ", 0, 3);
             switch (opcion) {
-                case 1 -> pendiente("RF-FIC-04 · Listar productos");
-                case 2 -> pendiente("RF-FIC-04 · Buscar por código");
-                case 3 -> pendiente("RF-FIC-04 · Buscar por nombre");
+                case 1 -> listarProductos();
+                case 2 -> buscarPorCodigo();
+                case 3 -> buscarPorNombre();
                 case 0 -> { }
                 default -> throw new IllegalStateException("Opción inesperada");
             }
         } while (opcion != 0);
+    }
+
+    /** RF-FIC-04.1: listado completo ordenado por código. */
+    private void listarProductos() {
+        if (avisarSiVacio()) {
+            return;
+        }
+        List<Producto> productos = inventario.listarOrdenado();
+        mostrarTabla(productos);
+        System.out.println("Total: " + productos.size() + " productos");
+        LectorConsola.pausar();
+    }
+
+    /** RF-FIC-04.2: búsqueda por código exacto. */
+    private void buscarPorCodigo() {
+        if (avisarSiVacio()) {
+            return;
+        }
+        String codigo = LectorConsola.leerTexto("Código: ");
+        if (codigo.isBlank()) {
+            System.out.println(ColoresConsola.pintar("Debes escribir un código.", ColoresConsola.AMARILLO));
+        } else {
+            inventario.buscarPorCodigo(codigo).ifPresentOrElse(
+                    this::mostrarFicha,
+                    () -> System.out.println(ColoresConsola.pintar(
+                            "No existe ningún producto con el código " + codigo.trim() + ".", ColoresConsola.AMARILLO)));
+        }
+        LectorConsola.pausar();
+    }
+
+    /** RF-FIC-04.3: búsqueda por fragmento del nombre. */
+    private void buscarPorNombre() {
+        if (avisarSiVacio()) {
+            return;
+        }
+        String texto = LectorConsola.leerTexto("Texto a buscar en el nombre: ");
+        if (texto.isBlank()) {
+            System.out.println(ColoresConsola.pintar("Debes escribir algún texto.", ColoresConsola.AMARILLO));
+        } else {
+            List<Producto> encontrados = inventario.buscarPorNombre(texto);
+            if (encontrados.isEmpty()) {
+                System.out.println(ColoresConsola.pintar(
+                        "Ningún producto contiene «" + texto.trim() + "» en su nombre.", ColoresConsola.AMARILLO));
+            } else {
+                mostrarTabla(encontrados);
+                System.out.println("Coincidencias: " + encontrados.size());
+            }
+        }
+        LectorConsola.pausar();
+    }
+
+    /** Muestra un aviso si el inventario está vacío. @return true si lo estaba */
+    private boolean avisarSiVacio() {
+        if (!inventario.estaVacio()) {
+            return false;
+        }
+        System.out.println(ColoresConsola.pintar(
+                "El inventario está vacío. Importa un catálogo JSON o XML (opciones 2 y 3) o recupera un .dat (opción 6).",
+                ColoresConsola.AMARILLO));
+        LectorConsola.pausar();
+        return true;
+    }
+
+    private void mostrarTabla(List<Producto> productos) {
+        String formato = "%-12s %-32s %10s %6s %5s %5s%n";
+        System.out.printf(formato, "CÓDIGO", "NOMBRE", "PRECIO", "STOCK", "CAT.", "PROV.");
+        for (Producto p : productos) {
+            System.out.printf(formato, p.getCodigo(), recortar(p.getNombre(), 32),
+                    p.getPrecio().toPlainString() + " €", p.getStock(), p.getCategoriaId(), p.getProveedorId());
+        }
+    }
+
+    private void mostrarFicha(Producto p) {
+        System.out.println("Código: " + p.getCodigo());
+        System.out.println("Nombre: " + p.getNombre());
+        System.out.println("Precio: " + p.getPrecio().toPlainString() + " € | Stock: " + p.getStock());
+        System.out.println("Categoría: " + p.getCategoriaId() + " | Proveedor: " + p.getProveedorId());
+    }
+
+    /** Acorta los nombres largos para que no descuadren la tabla. */
+    private String recortar(String texto, int maximo) {
+        return texto.length() <= maximo ? texto : texto.substring(0, maximo - 1) + "…";
     }
 
     private void menuExportaciones() {
