@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo>
+  <!-- Dos productos válidos y tres registros incorrectos -->
+  <producto>
+    <codigo>ROU-701</codigo><nombre>Router wifi 6</nombre>
+    <precio>79.00</precio><stock>4</stock>
+    <categoriaId>4</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+  <producto>
+    <codigo>ROU-702</codigo>
+    <precio>abc</precio><stock>4</stock>
+    <categoriaId>4</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+  <oferta>
+    <codigo>OFE-703</codigo>
+  </oferta>
+  <producto>
+    <codigo>ANT-704</codigo><nombre>Antena exterior</nombre>
+    <precio>45.00</precio><stock>-2</stock>
+    <categoriaId>4</categoriaId><proveedorId>0</proveedorId>
+  </producto>
+  <producto>
+    <codigo>CAB-705</codigo><nombre>Cable de red 5 m</nombre>
+    <precio>6.50</precio><stock>40</stock>
+    <categoriaId>4</categoriaId><proveedorId>2</proveedorId>
+    <extra><producto><codigo>NO-CUENTA</codigo></producto></extra>
+  </producto>
+</catalogo>

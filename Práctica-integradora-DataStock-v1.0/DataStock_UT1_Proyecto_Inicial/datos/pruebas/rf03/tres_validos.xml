@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo>
+  <producto>
+    <codigo>SWI-601</codigo><nombre>Switch 8 puertos</nombre>
+    <precio>29.90</precio><stock>5</stock>
+    <categoriaId>4</categoriaId><proveedorId>2</proveedorId>
+  </producto>
+  <producto>
+    <codigo>IMP-602</codigo><nombre>Impresora láser</nombre>
+    <precio>139.00</precio><stock>2</stock>
+    <categoriaId>5</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+  <producto>
+    <codigo>ESC-603</codigo><nombre>Escáner de documentos</nombre>
+    <precio>89.50</precio><stock>3</stock>
+    <categoriaId>5</categoriaId><proveedorId>2</proveedorId>
+  </producto>
+</catalogo>
