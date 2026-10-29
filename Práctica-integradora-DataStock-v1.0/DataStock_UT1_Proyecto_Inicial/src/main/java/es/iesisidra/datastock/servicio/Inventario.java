@@ -52,6 +52,16 @@ public class Inventario {
     }
 
     /**
+     * RF-FIC-06 · Sustituye todo el inventario por los productos recuperados.
+     * <p>A diferencia de importar (que añade), recuperar un .dat reemplaza la colección.
+     * Solo debe llamarse cuando la recuperación completa ha ido bien.</p>
+     */
+    public void sustituirTodo(List<Producto> nuevos) {
+        productos.clear();
+        productos.addAll(nuevos);
+    }
+
+    /**
      * RF-FIC-04 · Todos los productos ordenados por código.
      * @return una copia ordenada; la colección original no se reordena ni se modifica
      */

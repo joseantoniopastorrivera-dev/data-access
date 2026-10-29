@@ -11,6 +11,7 @@ import es.iesisidra.datastock.ficheros.ImportadorCatalogo;
 import es.iesisidra.datastock.ficheros.ImportadorJson;
 import es.iesisidra.datastock.ficheros.ImportadorXml;
 import es.iesisidra.datastock.ficheros.ResultadoImportacion;
+import es.iesisidra.datastock.ficheros.SerializadorInventario;
 import es.iesisidra.datastock.modelo.Producto;
 import es.iesisidra.datastock.servicio.Inventario;
 import es.iesisidra.datastock.util.ColoresConsola;
@@ -32,6 +33,7 @@ public class MenuPrincipal {
     private final ImportadorCatalogo importadorXml = new ImportadorXml();
     private final ExportadorCatalogo exportadorJson = new ExportadorJson();
     private final ExportadorCatalogo exportadorXml = new ExportadorXml();
+    private final SerializadorInventario serializador = new SerializadorInventario();
 
     /** @param inventario colección común de productos de esta ejecución. */
     public MenuPrincipal(Inventario inventario) { this.inventario = inventario; }
@@ -272,18 +274,63 @@ public class MenuPrincipal {
             System.out.println("0. Volver al menú principal");
             opcion = LectorConsola.leerOpcion("Selecciona una opción: ", 0, 2);
             switch (opcion) {
-                case 1 -> pendiente("RF-FIC-06 · Guardar inventario");
-                case 2 -> pendiente("RF-FIC-06 · Recuperar inventario");
+                case 1 -> guardarInventario();
+                case 2 -> recuperarInventario();
                 case 0 -> { }
                 default -> throw new IllegalStateException("Opción inesperada");
             }
         } while (opcion != 0);
     }
 
-    /** Sustituir las llamadas por servicios propios a medida que se implementen los RF. */
-    private void pendiente(String requisito) {
-        System.out.println(ColoresConsola.pintar("[PENDIENTE] " + requisito, ColoresConsola.AMARILLO));
-        System.out.println("Esta funcionalidad debe desarrollarla el alumnado.");
+    /** RF-FIC-06.1: serializa el inventario completo en un .dat. */
+    private void guardarInventario() {
+        System.out.println("\n===== GUARDAR INVENTARIO =====");
+        if (avisarSiVacio()) {
+            return;
+        }
+        String texto = LectorConsola.leerTexto("Ruta del fichero .dat: ");
+        try {
+            Path destino = ComprobadorRutas.destinoEscribible(texto);
+            if (!confirmarSobrescritura(destino)) {
+                System.out.println("Guardado cancelado. El fichero existente no se ha modificado.");
+            } else {
+                serializador.guardar(inventario.listarOrdenado(), destino);
+                System.out.println(ColoresConsola.pintar("Inventario guardado correctamente.", ColoresConsola.VERDE));
+                System.out.println("Ruta: " + destino.toAbsolutePath());
+                System.out.println("Productos guardados: " + inventario.tamano());
+            }
+        } catch (ExportacionException ex) {
+            System.out.println(ColoresConsola.pintar("Guardado cancelado: " + ex.getMessage(), ColoresConsola.ROJO));
+        }
+        LectorConsola.pausar();
+    }
+
+    /**
+     * RF-FIC-06.2: lee y valida un .dat completo y, solo si todo es correcto
+     * y el usuario lo confirma, sustituye el inventario actual.
+     */
+    private void recuperarInventario() {
+        System.out.println("\n===== RECUPERAR INVENTARIO =====");
+        String texto = LectorConsola.leerTexto("Ruta del fichero .dat: ");
+        try {
+            Path origen = ComprobadorRutas.ficheroLegible(texto);
+            List<Producto> recuperados = serializador.recuperar(origen);
+            if (!inventario.estaVacio()) {
+                System.out.println("Actualmente hay " + inventario.tamano() + " productos en memoria. "
+                        + "La recuperación sustituirá el inventario actual.");
+                if (!LectorConsola.confirmar("¿Continuar?")) {
+                    System.out.println("Recuperación cancelada. Se conserva el inventario actual.");
+                    LectorConsola.pausar();
+                    return;
+                }
+            }
+            inventario.sustituirTodo(recuperados);
+            System.out.println(ColoresConsola.pintar("Inventario recuperado correctamente.", ColoresConsola.VERDE));
+            System.out.println("Productos disponibles: " + inventario.tamano());
+        } catch (ImportacionException ex) {
+            System.out.println(ColoresConsola.pintar("Recuperación cancelada: " + ex.getMessage(), ColoresConsola.ROJO));
+            System.out.println("El inventario en memoria no ha cambiado.");
+        }
         LectorConsola.pausar();
     }
 }
