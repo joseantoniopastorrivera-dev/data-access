@@ -129,15 +129,3 @@ Una revisión completa del proyecto encontró cinco incidencias. Están corregid
 | INC-03 | Un JSON que no estaba en UTF-8 daba un falso error de sintaxis. | Se detecta la codificación incorrecta y se explica. |
 | INC-04 | Un `.dat` con datos primitivos mostraba «No se pudo leer el fichero: null». | Mensaje propio para `OptionalDataException`. |
 | INC-05 | El análisis seguro de XML estaba duplicado en la importación y en XPath. | Método común `XmlSeguro.parsear`. |
-
-## 8. Uso de herramientas de IA
-
-Durante el desarrollo he utilizado un asistente de IA exclusivamente como apoyo para el proceso de aprendizaje y consulta técnica de la práctica:
-
- -**Consulta conceptual y tutoría**: resolución de dudas sobre el planteamiento de los requisitos, el funcionamiento de las API (NIO, Gson, DOM, XPath, serialización, RandomAccessFile) y la discusión de alternativas de diseño.
-
--**Comprensión de patrones y buenas prácticas**: revisión de conceptos teóricos sobre seguridad y manejo de estructuras de datos (como el modo estricto de Gson, la protección frente a XXE, el filtrado de deserialización o el cálculo de desplazamientos), aplicándolos y adaptándolos por mí mismo.
-
--**Apoyo en la depuración**: consulta puntual para la detección de errores conceptuales y casos límite en la lógica implementada.
-
-Todas las decisiones de diseño, la codificación completa, la ejecución de pruebas y la autoría final del proyecto son enteramente propias.
