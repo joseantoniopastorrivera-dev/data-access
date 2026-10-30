@@ -1,0 +1,119 @@
+########## Sesión 1: generar stock.bin, consultar con seek y modificar el stock (CP-RAF-01 a CP-RAF-04)
+===== ACCESO ALEATORIO =====
+Fichero binario de stock (p. ej. datos/salidas/stock.bin; Intro para salir): datos/salidas/stock_evidencia.bin
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 0
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 3
+El fichero datos\salidas\stock_evidencia.bin no existe. Genéralo primero.
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 0
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 2
+No hay productos en memoria: carga primero un catálogo (opción 1). No se genera el fichero.
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 0
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 1
+Catálogo JSON o XML: datos/pruebas/rf08/catalogo_stock.json
+Importados: 4 | Rechazados: 0
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 4
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 2
+Registros: 4 | Tamaño: 144 bytes
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 4
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 5
+[0] ALT-001      | 18.50 € | stock 10
+[1] CAB-002      | 7.99 € | stock 40
+[2] MON-003      | 149.99 € | stock 8
+[3] TEC-004      | 29.99 € | stock 15
+Total: 4 registros
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 4
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 3
+Registros: 4 | Tamaño: 144 bytes
+Consultar posición (0-3): 2
+[2] MON-003      | 149.99 € | stock 8
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 4
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 4
+Posición a modificar (0-3): 2
+[2] MON-003      | 149.99 € | stock 8
+Nuevo stock: 15
+Actualización correcta: stock 8 → 15
+(El producto MON-003 en memoria sigue con stock 8: el fichero es una copia independiente.)
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 4
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 5
+[0] ALT-001      | 18.50 € | stock 10
+[1] CAB-002      | 7.99 € | stock 40
+[2] MON-003      | 149.99 € | stock 15
+[3] TEC-004      | 29.99 € | stock 15
+Total: 4 registros
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 4
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 3
+Registros: 4 | Tamaño: 144 bytes
+Consultar posición (0-3): 4
+Posición fuera de rango: debe estar entre 0 y 3.
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 4
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 3
+Registros: 4 | Tamaño: 144 bytes
+Consultar posición (0-3): -1
+Posición fuera de rango: debe estar entre 0 y 3.
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 4
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 4
+Posición a modificar (0-3): 1
+[1] CAB-002      | 7.99 € | stock 40
+Nuevo stock: -3
+El stock no puede ser negativo.
+
+Fichero: datos\salidas\stock_evidencia.bin | Productos en memoria: 4
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 0
+Fin de la actividad.
+
+########## Sesión 2: fichero con tamaño no múltiplo de 36 (CP-RAF-05)
+===== ACCESO ALEATORIO =====
+Fichero binario de stock (p. ej. datos/salidas/stock.bin; Intro para salir): datos/pruebas/rf08/tamano_invalido.bin
+
+Fichero: datos\pruebas\rf08\tamano_invalido.bin | Productos en memoria: 0
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 3
+Fichero inválido: ocupa 100 bytes, que no es múltiplo de 36.
+
+Fichero: datos\pruebas\rf08\tamano_invalido.bin | Productos en memoria: 0
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 5
+Fichero inválido: ocupa 100 bytes, que no es múltiplo de 36.
+
+Fichero: datos\pruebas\rf08\tamano_invalido.bin | Productos en memoria: 0
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: 0
+Fin de la actividad.
