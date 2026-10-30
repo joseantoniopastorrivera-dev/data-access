@@ -2,15 +2,10 @@ package es.iesisidra.datastock.ficheros;
 
 import es.iesisidra.datastock.servicio.Inventario;
 import es.iesisidra.datastock.validacion.DatosProducto;
-import java.io.IOException;
 import java.nio.file.Path;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 /**
  * RF-FIC-03 · Importar un catálogo XML mediante DOM.
@@ -30,7 +25,7 @@ public class ImportadorXml implements ImportadorCatalogo {
     @Override
     public ResultadoImportacion importar(String textoRuta, Inventario inventario) throws ImportacionException {
         Path ruta = ComprobadorRutas.ficheroLegible(textoRuta);
-        Element raiz = leerRaiz(ruta);
+        Element raiz = XmlSeguro.parsear(ruta, RAIZ).getDocumentElement();
 
         // A partir de aquí el documento es válido: cada producto se trata por separado.
         ProcesoImportacion proceso = new ProcesoImportacion(inventario);
@@ -49,33 +44,6 @@ public class ImportadorXml implements ImportadorCatalogo {
             }
         }
         return proceso.getResultado();
-    }
-
-    /** Analiza el documento de forma segura y comprueba que la raíz es &lt;catalogo&gt;. */
-    private Element leerRaiz(Path ruta) throws ImportacionException {
-        Document documento;
-        try {
-            documento = XmlSeguro.nuevoDocumentBuilder().parse(ruta.toFile());
-        } catch (SAXParseException ex) {
-            if (String.valueOf(ex.getMessage()).contains("DOCTYPE")) {
-                throw new ImportacionException("El XML contiene una declaración DOCTYPE (DTD o entidades); "
-                        + "se rechaza por seguridad.", ex);
-            }
-            throw new ImportacionException("El fichero no es un XML bien formado (línea " + ex.getLineNumber()
-                    + ", columna " + ex.getColumnNumber() + "): " + ex.getMessage(), ex);
-        } catch (SAXException ex) {
-            throw new ImportacionException("El fichero no es un XML válido: " + ex.getMessage(), ex);
-        } catch (IOException ex) {
-            throw new ImportacionException("No se pudo leer el fichero: " + ex.getMessage(), ex);
-        } catch (ParserConfigurationException ex) {
-            throw new ImportacionException("No se pudo configurar el analizador XML: " + ex.getMessage(), ex);
-        }
-
-        Element raiz = documento.getDocumentElement();
-        if (!RAIZ.equals(raiz.getNodeName())) {
-            throw new ImportacionException("La raíz del XML debe ser <" + RAIZ + "> y es <" + raiz.getNodeName() + ">.");
-        }
-        return raiz;
     }
 
     /** Traduce un elemento &lt;producto&gt; a DatosProducto (todos los campos como texto). */
