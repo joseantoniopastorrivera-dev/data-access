@@ -1,0 +1,13 @@
+Ficheros de prueba de las incidencias detectadas en la revisión final (INC-01 a INC-05):
+- precio_gigante.json: BIG-001 con precio 1E999999999 y OK-002 correcto. Antes se importaba BIG-001 y la
+  aplicación se colgaba (OutOfMemoryError) al listar o exportar; ahora se rechaza y solo entra OK-002 (INC-01).
+- precios_limite.json: notación científica (1E+3 → 1000.00), tres decimales (rechazado), el máximo
+  99999999.99 (aceptado), 100000000 (rechazado) y "14.5000" (→ 14.50) (INC-01 e INC-02).
+- precio_gigante.dat: inventario serializado con ese mismo precio manipulado; la recuperación lo rechaza
+  sin agotar la memoria (INC-01).
+- codificacion_latin1.json: JSON guardado en ISO-8859-1 con una «ñ»; ahora se informa de que no está en
+  UTF-8 en lugar de un falso error de sintaxis (INC-03).
+- solo_primitivos.dat: un ObjectOutputStream con un writeInt(42); antes daba «No se pudo leer el fichero:
+  null» y ahora explica que no contiene objetos de DataStock (INC-04).
+Los dos .dat se generaron con un programa auxiliar externo al proyecto que escribe esos datos con
+ObjectOutputStream. INC-05 (análisis seguro de XML centralizado) se comprueba con los ficheros de rf03.

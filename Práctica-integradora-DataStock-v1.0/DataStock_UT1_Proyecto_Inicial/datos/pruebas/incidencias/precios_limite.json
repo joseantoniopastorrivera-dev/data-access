@@ -1,0 +1,9 @@
+{
+  "productos": [
+    {"codigo":"SCI-001","nombre":"Precio en notación científica","precio":1E+3,"stock":1,"categoriaId":1,"proveedorId":1},
+    {"codigo":"DEC-002","nombre":"Precio con tres decimales","precio":19.999,"stock":1,"categoriaId":1,"proveedorId":1},
+    {"codigo":"MAX-003","nombre":"Precio máximo admitido","precio":99999999.99,"stock":1,"categoriaId":1,"proveedorId":1},
+    {"codigo":"SUP-004","nombre":"Precio por encima del máximo","precio":100000000,"stock":1,"categoriaId":1,"proveedorId":1},
+    {"codigo":"CER-005","nombre":"Ceros decimales sobrantes","precio":"14.5000","stock":1,"categoriaId":1,"proveedorId":1}
+  ]
+}
