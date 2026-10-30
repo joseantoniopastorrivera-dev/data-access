@@ -2,6 +2,7 @@ package es.iesisidra.datastock.ficheros;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
@@ -13,6 +14,7 @@ import es.iesisidra.datastock.servicio.Inventario;
 import es.iesisidra.datastock.validacion.DatosProducto;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.CharacterCodingException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -67,11 +69,14 @@ public class ImportadorJson implements ImportadorCatalogo {
             if (jsonReader.peek() != JsonToken.END_DOCUMENT) {
                 throw new ImportacionException("El JSON tiene contenido después del objeto raíz.");
             }
+        } catch (JsonIOException ex) {
+            // Gson envuelve aquí los errores de lectura del Reader, como una codificación incorrecta.
+            throw errorDeLectura(ex.getCause() instanceof IOException io ? io : new IOException(ex));
         } catch (JsonParseException | MalformedJsonException ex) {
             throw new ImportacionException("El fichero no es un JSON válido" + ubicacion(ex)
                     + ": revisa llaves, corchetes, comillas y comas.", ex);
         } catch (IOException ex) {
-            throw new ImportacionException("No se pudo leer el fichero: " + ex.getMessage(), ex);
+            throw errorDeLectura(ex);
         }
 
         if (raiz.isJsonNull()) {
@@ -85,6 +90,19 @@ public class ImportadorJson implements ImportadorCatalogo {
             throw new ImportacionException("El JSON no contiene el array \"" + CLAVE_PRODUCTOS + "\".");
         }
         return productos.getAsJsonArray();
+    }
+
+    /**
+     * Traduce un error de lectura a un mensaje claro. Si el fichero no está en
+     * UTF-8 (por ejemplo, guardado en Latin-1 con una «ñ»), el decodificador lanza
+     * CharacterCodingException, que no es un error de sintaxis JSON.
+     */
+    private ImportacionException errorDeLectura(IOException ex) {
+        if (ex instanceof CharacterCodingException) {
+            return new ImportacionException("El fichero no está codificado en UTF-8: guárdalo como UTF-8 "
+                    + "y vuelve a intentarlo.", ex);
+        }
+        return new ImportacionException("No se pudo leer el fichero: " + ex.getMessage(), ex);
     }
 
     /** Extrae "línea X, columna Y" del mensaje de Gson, que viene en inglés. */
