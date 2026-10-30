@@ -118,6 +118,18 @@ Las 34 pruebas de aceptación del enunciado (CP-FIC, CP-JSON, CP-XML, CP-CON, CP
 
 Los ficheros de cada prueba están en `datos/pruebas/rfXX/`. En `rf05`, `rf06` y `rf08` hay un `LEEME.txt` que explica cada fichero.
 
+### Incidencias corregidas tras la revisión final
+
+Una revisión completa del proyecto encontró cinco incidencias. Están corregidas, tienen sus ficheros de prueba en `datos/pruebas/incidencias/` y figuran en el apartado 3 del registro de pruebas. Después de corregirlas se repitieron las 34 pruebas de aceptación.
+
+| ID | Problema | Corrección |
+|---|---|---|
+| INC-01 | Un precio enorme (`1E999999999`) se importaba y la aplicación se cerraba por falta de memoria al listarlo o exportarlo. También se aceptaban precios con más de 2 decimales. | El precio se limita a `DECIMAL(10,2)`, como en la base de datos de la UT2, y se normaliza a 2 decimales. |
+| INC-02 | `1E+3` se exportaba como `1E+3` en JSON y como `1000` en XML. | Con la normalización de INC-01, en ambos formatos sale `1000.00`. |
+| INC-03 | Un JSON que no estaba en UTF-8 daba un falso error de sintaxis. | Se detecta la codificación incorrecta y se explica. |
+| INC-04 | Un `.dat` con datos primitivos mostraba «No se pudo leer el fichero: null». | Mensaje propio para `OptionalDataException`. |
+| INC-05 | El análisis seguro de XML estaba duplicado en la importación y en XPath. | Método común `XmlSeguro.parsear`. |
+
 ## 8. Uso de herramientas de IA
 
 Durante el desarrollo he utilizado un asistente de IA (Claude, de Anthropic) como apoyo de aprendizaje:
