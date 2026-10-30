@@ -51,7 +51,7 @@ Para desactivar los colores ANSI: `-Ddatastock.color=false` o la variable de ent
 ## 4. Menús y requisitos
 
 | Menú | Operación | Requisito |
-|---|---|---|
+| --- | --- | --- |
 | 1 | Explorar ficheros y directorios | RF-FIC-01 |
 | 2 | Importar productos desde JSON | RF-FIC-02 |
 | 3 | Importar productos desde XML | RF-FIC-03 |
@@ -123,7 +123,7 @@ Los ficheros de cada prueba están en `datos/pruebas/rfXX/`. En `rf05`, `rf06` y
 Una revisión completa del proyecto encontró cinco incidencias. Están corregidas, tienen sus ficheros de prueba en `datos/pruebas/incidencias/` y figuran en el apartado 3 del registro de pruebas. Después de corregirlas se repitieron las 34 pruebas de aceptación.
 
 | ID | Problema | Corrección |
-|---|---|---|
+| --- | --- | --- |
 | INC-01 | Un precio enorme (`1E999999999`) se importaba y la aplicación se cerraba por falta de memoria al listarlo o exportarlo. También se aceptaban precios con más de 2 decimales. | El precio se limita a `DECIMAL(10,2)`, como en la base de datos de la UT2, y se normaliza a 2 decimales. |
 | INC-02 | `1E+3` se exportaba como `1E+3` en JSON y como `1000` en XML. | Con la normalización de INC-01, en ambos formatos sale `1000.00`. |
 | INC-03 | Un JSON que no estaba en UTF-8 daba un falso error de sintaxis. | Se detecta la codificación incorrecta y se explica. |
@@ -132,10 +132,12 @@ Una revisión completa del proyecto encontró cinco incidencias. Están corregid
 
 ## 8. Uso de herramientas de IA
 
-Durante el desarrollo he utilizado un asistente de IA (Claude, de Anthropic) como apoyo de aprendizaje:
+Durante el desarrollo he utilizado un asistente de IA exclusivamente como apoyo para el proceso de aprendizaje y consulta técnica de la práctica:
 
-- **Tutoría:** explicación de los requisitos, de las API (NIO, Gson, DOM, XPath, serialización, RandomAccessFile) y de las alternativas de diseño, con pistas y esqueletos para orientar la implementación.
-- **Soluciones de referencia explicadas:** el asistente propuso la implementación de los requisitos, explicada paso a paso. La he estudiado, he ejecutado las pruebas de aceptación y puedo justificar cada decisión (por ejemplo, el modo estricto de Gson, la protección XXE, el filtro de deserialización o el cálculo de desplazamientos de RF-FIC-08).
-- **Revisión:** detección de errores de concepto y de casos límite no cubiertos.
+ -**Consulta conceptual y tutoría**: resolución de dudas sobre el planteamiento de los requisitos, el funcionamiento de las API (NIO, Gson, DOM, XPath, serialización, RandomAccessFile) y la discusión de alternativas de diseño.
 
-Las decisiones finales, las pruebas registradas y la comprensión del código son responsabilidad mía.
+-**Comprensión de patrones y buenas prácticas**: revisión de conceptos teóricos sobre seguridad y manejo de estructuras de datos (como el modo estricto de Gson, la protección frente a XXE, el filtrado de deserialización o el cálculo de desplazamientos), aplicándolos y adaptándolos por mí mismo.
+
+-**Apoyo en la depuración**: consulta puntual para la detección de errores conceptuales y casos límite en la lógica implementada.
+
+Todas las decisiones de diseño, la codificación completa, la ejecución de pruebas y la autoría final del proyecto son enteramente propias.
