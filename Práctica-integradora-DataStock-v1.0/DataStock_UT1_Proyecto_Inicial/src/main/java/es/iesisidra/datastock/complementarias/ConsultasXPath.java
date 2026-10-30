@@ -3,7 +3,6 @@ package es.iesisidra.datastock.complementarias;
 import es.iesisidra.datastock.ficheros.ComprobadorRutas;
 import es.iesisidra.datastock.ficheros.ImportacionException;
 import es.iesisidra.datastock.ficheros.XmlSeguro;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.xml.namespace.QName;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -19,8 +17,6 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 /**
  * RF-FIC-07 · Consultas XPath sobre un catálogo XML abierto.
@@ -47,22 +43,7 @@ public class ConsultasXPath {
      */
     public static ConsultasXPath abrir(String textoRuta) throws ImportacionException {
         Path ruta = ComprobadorRutas.ficheroLegible(textoRuta);
-        Document documento;
-        try {
-            documento = XmlSeguro.nuevoDocumentBuilder().parse(ruta.toFile());
-        } catch (SAXParseException ex) {
-            if (String.valueOf(ex.getMessage()).contains("DOCTYPE")) {
-                throw new ImportacionException("El XML contiene una declaración DOCTYPE; se rechaza por seguridad.", ex);
-            }
-            throw new ImportacionException("El XML está mal formado (línea " + ex.getLineNumber() + "): "
-                    + ex.getMessage(), ex);
-        } catch (SAXException | IOException | ParserConfigurationException ex) {
-            throw new ImportacionException("No se pudo abrir el XML: " + ex.getMessage(), ex);
-        }
-        if (!"catalogo".equals(documento.getDocumentElement().getNodeName())) {
-            throw new ImportacionException("La raíz del XML debe ser <catalogo>.");
-        }
-        return new ConsultasXPath(documento);
+        return new ConsultasXPath(XmlSeguro.parsear(ruta, "catalogo"));
     }
 
     /** Consulta 1 · Productos cuyo código coincide, sin distinguir mayúsculas ni espacios extremos. */
