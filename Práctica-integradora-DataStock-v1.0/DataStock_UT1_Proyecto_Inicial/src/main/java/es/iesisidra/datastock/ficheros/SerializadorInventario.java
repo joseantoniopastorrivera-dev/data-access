@@ -116,10 +116,12 @@ public class SerializadorInventario {
     /**
      * Pasa el producto leído por las mismas reglas que una importación.
      * Un .dat manipulado podría contener, por ejemplo, un precio negativo.
+     * Se usa toString() y no toPlainString(): con un precio enorme manipulado,
+     * toPlainString() agotaría la memoria antes de poder validarlo.
      */
     private DatosProducto aDatos(int posicion, Producto p) {
         return new DatosProducto(posicion, p.getCodigo(), p.getNombre(),
-                p.getPrecio() == null ? null : p.getPrecio().toPlainString(),
+                p.getPrecio() == null ? null : p.getPrecio().toString(),
                 String.valueOf(p.getStock()), String.valueOf(p.getCategoriaId()), String.valueOf(p.getProveedorId()));
     }
 }

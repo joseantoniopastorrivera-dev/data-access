@@ -2,6 +2,7 @@ package es.iesisidra.datastock.validacion;
 
 import es.iesisidra.datastock.modelo.Producto;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -17,6 +18,9 @@ public class ValidadorProducto {
     private static final int NOMBRE_MIN = 3;
     private static final int NOMBRE_MAX = 100;
     private static final Pattern PATRON_CODIGO = Pattern.compile("[A-Z0-9-]+");
+    /** El precio se guardará en la UT2 como DECIMAL(10,2): 8 cifras enteras y 2 decimales. */
+    private static final int PRECIO_MAX_ENTEROS = 8;
+    private static final int PRECIO_DECIMALES = 2;
 
     /**
      * Valida los datos y, si todo es correcto, construye el Producto.
@@ -75,7 +79,13 @@ public class ValidadorProducto {
         return codigo.trim().toUpperCase(Locale.ROOT);
     }
 
-    /** Convierte el precio a BigDecimal y comprueba que es mayor que 0. */
+    /**
+     * Convierte el precio a BigDecimal, comprueba que es mayor que 0 y que cabe en
+     * DECIMAL(10,2), y lo devuelve siempre con 2 decimales (14.5 → 14.50, 1E+3 → 1000.00).
+     * <p>Sin el límite de tamaño, un precio como 1E999999999 se aceptaría y, al
+     * mostrarlo o exportarlo, toPlainString() intentaría crear un texto de mil
+     * millones de cifras y agotaría la memoria.</p>
+     */
     private BigDecimal leerPrecio(String texto, List<String> errores) {
         if (texto == null || texto.isBlank()) {
             errores.add("el precio es obligatorio");
@@ -87,7 +97,18 @@ public class ValidadorProducto {
                 errores.add("el precio debe ser mayor que 0");
                 return null;
             }
-            return precio;
+            BigDecimal sinCeros = precio.stripTrailingZeros();
+            // Se calcula con long: con escalas extremas, precision - scale desborda un int.
+            long cifrasEnteras = (long) sinCeros.precision() - sinCeros.scale();
+            if (cifrasEnteras > PRECIO_MAX_ENTEROS) {
+                errores.add("el precio no puede superar 99999999.99");
+                return null;
+            }
+            if (sinCeros.scale() > PRECIO_DECIMALES) {
+                errores.add("el precio admite como máximo " + PRECIO_DECIMALES + " decimales (" + texto.trim() + ")");
+                return null;
+            }
+            return precio.setScale(PRECIO_DECIMALES, RoundingMode.UNNECESSARY);
         } catch (NumberFormatException ex) {
             errores.add("el precio no es un número válido (" + texto + ")");
             return null;
