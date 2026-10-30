@@ -1,0 +1,9 @@
+Ficheros de prueba y resultados de RF-FIC-07 (XPathActividad):
+- catalogo_xpath.xml: cinco productos; incluye IMP-100 con precio exactamente 100.00 (para comprobar que
+  «precio superior a 100» lo excluye) y ERR-999 con precio «abc» (para comprobar que se cuenta igualmente).
+- sesion_consultas_xpath.txt: resultado de una sesión real de la actividad. Primero se rechaza un XML con
+  DOCTYPE (datos/pruebas/rf03/con_dtd_entidad_externa.xml) y después, sobre catalogo_xpath.xml, se hacen
+  las cuatro consultas: código « mon-003 » (CP-XPATH-01), código inexistente, categoría 1 (CP-XPATH-02),
+  categoría no válida, precio superior a 100 (CP-XPATH-03), precio no válido y contador (5 productos).
+  Los valores tecleados aparecen después de cada pregunta.
+CP-XPATH-04 (contar tres productos) usa datos/pruebas/rf03/tres_validos.xml.

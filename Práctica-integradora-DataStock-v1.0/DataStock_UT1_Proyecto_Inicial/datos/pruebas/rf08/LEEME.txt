@@ -5,4 +5,10 @@ Ficheros de prueba de RF-FIC-08 (AccesoAleatorioActividad):
   el stock de la posición 2 de 8 a 15. Comparado con el fichero original solo cambia el byte 107,
   que está dentro del campo stock del registro 2 (bytes 104-107 = 2 × 36 + 32 … + 35).
 - tamano_invalido.bin: 100 bytes a cero; como 100 no es múltiplo de 36 se rechaza (CP-RAF-05).
+- sesion_acceso_aleatorio.txt: resultado de dos sesiones reales de la actividad. En la 1, se intenta
+  consultar antes de que exista el fichero y generarlo sin productos; después se carga catalogo_stock.json,
+  se genera (4 registros, 144 bytes), se listan los registros, se consulta la posición 2, se cambia su
+  stock de 8 a 15 (el producto en memoria sigue con 8) y se prueban las posiciones 4 y -1 y un stock
+  negativo. El binario resultante coincide byte a byte con stock_tras_modificar.bin. La sesión 2 abre
+  tamano_invalido.bin. Los valores tecleados aparecen después de cada pregunta.
 Formato de cada registro: código (12 char = 24 bytes) + precio (double, 8 bytes) + stock (int, 4 bytes).
