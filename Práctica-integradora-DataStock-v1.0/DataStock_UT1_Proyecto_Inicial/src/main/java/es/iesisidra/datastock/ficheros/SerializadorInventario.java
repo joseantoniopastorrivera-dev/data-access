@@ -11,6 +11,7 @@ import java.io.InvalidClassException;
 import java.io.ObjectInputFilter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -79,6 +80,9 @@ public class SerializadorInventario {
                     + "incompatible: no es un inventario guardado por DataStock.", ex);
         } catch (StreamCorruptedException | EOFException ex) {
             throw new ImportacionException("El fichero está dañado o no es un inventario serializado de DataStock.", ex);
+        } catch (OptionalDataException ex) {
+            throw new ImportacionException("El fichero contiene datos primitivos en lugar de objetos: "
+                    + "no es un inventario guardado por DataStock.", ex);
         } catch (ClassNotFoundException ex) {
             throw new ImportacionException("El fichero contiene clases desconocidas: " + ex.getMessage(), ex);
         } catch (IOException ex) {
