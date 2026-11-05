@@ -73,8 +73,8 @@ DataStock_UT1_Proyecto_Inicial/
 │   ├── pruebas/rf01 … rf08/ # Ficheros de prueba válidos e inválidos y evidencias, por requisito
 │   └── salidas/             # Exportaciones de trabajo (ignoradas por Git)
 ├── docs/
-│   └── Registro_de_Pruebas_JoseAntonio_PastorRivera.docx
-├── material_referencia/     # Script SQL y diagrama ER para la UT2
+│   └── registro-de-pruebas-joseantonio-pastorrivera.docx
+├── material-referencia/     # Script SQL y diagrama ER para la UT2
 └── src/main/java/es/iesisidra/datastock/
     ├── App.java                     # Punto de entrada: crea el inventario y el menú
     ├── modelo/                      # Producto, Categoria, Proveedor, MovimientoStock (facilitados)
@@ -114,7 +114,7 @@ DataStock_UT1_Proyecto_Inicial/
 
 ## 7. Pruebas
 
-Las 34 pruebas de aceptación del enunciado (CP-FIC, CP-JSON, CP-XML, CP-CON, CP-EXP, CP-SER, CP-XPATH, CP-RAF) se ejecutaron y están documentadas en `docs/Registro_de_Pruebas_JoseAntonio_PastorRivera.docx`, con los datos usados, el resultado esperado, el obtenido y el estado. Todas están **SUPERADAS**. El registro incluye también las incidencias detectadas y cómo se corrigieron.
+Las 34 pruebas de aceptación del enunciado (CP-FIC, CP-JSON, CP-XML, CP-CON, CP-EXP, CP-SER, CP-XPATH, CP-RAF) se ejecutaron y están documentadas en `docs/registro-de-pruebas-joseantonio-pastorrivera.docx`, con los datos usados, el resultado esperado, el obtenido y el estado. Todas están **SUPERADAS**. El registro incluye también las incidencias detectadas y cómo se corrigieron.
 
 Los ficheros de cada prueba están en `datos/pruebas/rfXX/`. En `rf05`, `rf06` y `rf08` hay un `LEEME.txt` que explica cada fichero.
 
