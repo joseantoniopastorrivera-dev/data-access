@@ -21,7 +21,9 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * Presentación de menús y navegación de la primera fase de DataStock.
+ * Menú principal de DataStock. Las opciones 1-6 (UT1) trabajan con el inventario
+ * en memoria; la opción 7 (UT2) trabaja con MySQL. Los dos almacenes NO se
+ * sincronizan solos: solo la opción 7.8 copia productos de memoria a MySQL.
  * <p>Esta clase solo muestra opciones, pide datos y presenta resultados. El
  * acceso a ficheros, la validación y el procesamiento están delegados en los
  * paquetes {@code ficheros}, {@code validacion} y {@code servicio}.</p>
@@ -34,23 +36,29 @@ public class MenuPrincipal {
     private final ExportadorCatalogo exportadorJson = new ExportadorJson();
     private final ExportadorCatalogo exportadorXml = new ExportadorXml();
     private final SerializadorInventario serializador = new SerializadorInventario();
+    /** UT2: menú JDBC. Recibe el inventario solo para la opción 7.8 (copiar memoria a MySQL). */
+    private final MenuMySQL menuMySQL;
 
     /** @param inventario colección común de productos de esta ejecución. */
-    public MenuPrincipal(Inventario inventario) { this.inventario = inventario; }
+    public MenuPrincipal(Inventario inventario) {
+        this.inventario = inventario;
+        this.menuMySQL = new MenuMySQL(inventario);
+    }
 
     /** Ejecuta el menú principal hasta que el usuario selecciona salir. */
     public void iniciar() {
         int opcion;
         do {
             mostrarCabecera();
-            System.out.println("1. Explorar ficheros y directorios");
-            System.out.println("2. Importar productos desde JSON");
-            System.out.println("3. Importar productos desde XML");
-            System.out.println("4. Consultar productos");
-            System.out.println("5. Exportar productos");
-            System.out.println("6. Guardar y recuperar inventario");
+            System.out.println("1. Explorar ficheros y directorios (UT1)");
+            System.out.println("2. Importar productos desde JSON (UT1)");
+            System.out.println("3. Importar productos desde XML (UT1)");
+            System.out.println("4. Consultar productos en memoria (UT1)");
+            System.out.println("5. Exportar productos (UT1)");
+            System.out.println("6. Guardar y recuperar inventario (UT1)");
+            System.out.println("7. Gestionar base de datos MySQL (UT2)");
             System.out.println("0. Salir");
-            opcion = LectorConsola.leerOpcion("Selecciona una opción: ", 0, 6);
+            opcion = LectorConsola.leerOpcion("Selecciona una opción: ", 0, 7);
             switch (opcion) {
                 case 1 -> explorarRuta();
                 case 2 -> importar("JSON", importadorJson);
@@ -58,6 +66,7 @@ public class MenuPrincipal {
                 case 4 -> menuConsultas();
                 case 5 -> menuExportaciones();
                 case 6 -> menuSerializacion();
+                case 7 -> menuMySQL.iniciar();
                 case 0 -> System.out.println(ColoresConsola.pintar("Hasta pronto.", ColoresConsola.VERDE));
                 default -> throw new IllegalStateException("Opción inesperada");
             }
@@ -67,9 +76,9 @@ public class MenuPrincipal {
     private void mostrarCabecera() {
         System.out.println(ColoresConsola.pintar("\n================================================", ColoresConsola.CIAN));
         System.out.println(ColoresConsola.pintar("         DATASTOCK - GESTIÓN DE INVENTARIO", ColoresConsola.NEGRITA));
-        System.out.println(ColoresConsola.pintar("                 FASE 1 - UT1", ColoresConsola.CIAN));
+        System.out.println(ColoresConsola.pintar("           FASE 2 - UT1 + UT2 (MySQL)", ColoresConsola.CIAN));
         System.out.println(ColoresConsola.pintar("================================================", ColoresConsola.CIAN));
-        System.out.println(ColoresConsola.pintar("Productos en memoria: " + inventario.tamano(), ColoresConsola.GRIS));
+        System.out.println(ColoresConsola.pintar("Productos en memoria (UT1): " + inventario.tamano(), ColoresConsola.GRIS));
     }
 
     /** RF-FIC-01: pide la ruta y delega la exploración en ExploradorRutas. */
