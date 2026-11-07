@@ -1,0 +1,5 @@
+{
+  "productos": [
+    {"codigo":"LAT-001","nombre":"Piña guardada en Latin-1","precio":5,"stock":1,"categoriaId":1,"proveedorId":1}
+  ]
+}

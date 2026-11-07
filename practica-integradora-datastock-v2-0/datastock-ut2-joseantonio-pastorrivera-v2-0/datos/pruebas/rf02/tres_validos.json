@@ -1,0 +1,7 @@
+{
+  "productos": [
+    {"codigo":"TEC-101","nombre":"Teclado compacto","precio":24.90,"stock":10,"categoriaId":1,"proveedorId":1},
+    {"codigo":"RAT-102","nombre":"Ratón ergonómico","precio":32.00,"stock":6,"categoriaId":1,"proveedorId":2},
+    {"codigo":"MON-103","nombre":"Monitor 27 pulgadas","precio":219.99,"stock":4,"categoriaId":2,"proveedorId":2}
+  ]
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo>
+  <producto>
+    <codigo>MON-003</codigo>
+    <nombre>Monitor 24 pulgadas</nombre>
+    <precio>149.99</precio>
+    <stock>6</stock>
+    <categoriaId>2</categoriaId>
+    <proveedorId>2</proveedorId>
+  </producto>
+</catalogo>
