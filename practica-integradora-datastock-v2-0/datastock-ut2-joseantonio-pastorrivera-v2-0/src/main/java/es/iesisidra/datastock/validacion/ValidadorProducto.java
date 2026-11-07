@@ -2,130 +2,73 @@ package es.iesisidra.datastock.validacion;
 
 import es.iesisidra.datastock.modelo.Producto;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
-import java.util.Locale;
-import java.util.regex.Pattern;
 
 /**
- * Reglas comunes de los campos de un producto (enunciado, apartado 6).
+ * Valida un producto completo (enunciado UT1, apartado 6, y UT2, apartado 3.1).
  * <p>Convierte los textos de {@link DatosProducto} en tipos Java y comprueba
- * cada regla. Si algo falla, añade un mensaje a la lista de errores.
- * La usan la importación JSON y la XML, así que ambas aplican las mismas reglas.</p>
+ * cada regla con {@link ReglasCampos}. Si algo falla, añade un mensaje a la lista
+ * de errores. Lo usan la importación JSON y XML (UT1) y la importación de
+ * memoria a MySQL (UT2), así que las tres aplican exactamente las mismas reglas.</p>
  */
 public class ValidadorProducto {
-    private static final int CODIGO_MAX = 12;
-    private static final int NOMBRE_MIN = 3;
-    private static final int NOMBRE_MAX = 100;
-    private static final Pattern PATRON_CODIGO = Pattern.compile("[A-Z0-9-]+");
-    /** El precio se guardará en la UT2 como DECIMAL(10,2): 8 cifras enteras y 2 decimales. */
-    private static final int PRECIO_MAX_ENTEROS = 8;
-    private static final int PRECIO_DECIMALES = 2;
 
     /**
      * Valida los datos y, si todo es correcto, construye el Producto.
-     * @param datos   valores leídos del fichero
+     * @param datos   valores leídos del fichero o de la memoria
      * @param errores lista donde se añaden los motivos de rechazo (uno por regla incumplida)
      * @return el producto si es válido; {@code null} si se ha añadido algún error
      */
     public Producto validar(DatosProducto datos, List<String> errores) {
         int erroresIniciales = errores.size();
 
-        String codigo = normalizarCodigo(datos.codigo());
-        if (codigo == null) {
-            errores.add("el código es obligatorio");
-        } else if (codigo.length() > CODIGO_MAX) {
-            errores.add("el código no puede superar " + CODIGO_MAX + " caracteres");
-        } else if (!PATRON_CODIGO.matcher(codigo).matches()) {
-            errores.add("el código solo admite letras A-Z, dígitos y guiones");
-        }
+        String codigo = ReglasCampos.normalizarCodigo(datos.codigo());
+        anadir(errores, ReglasCampos.errorCodigo(codigo));
 
         String nombre = datos.nombre() == null ? null : datos.nombre().trim();
-        if (nombre == null || nombre.isEmpty()) {
-            errores.add("el nombre es obligatorio");
-        } else if (nombre.length() < NOMBRE_MIN || nombre.length() > NOMBRE_MAX) {
-            errores.add("el nombre debe tener entre " + NOMBRE_MIN + " y " + NOMBRE_MAX + " caracteres");
-        }
+        anadir(errores, ReglasCampos.errorTexto(nombre, "el nombre",
+                ReglasCampos.NOMBRE_PRODUCTO_MIN, ReglasCampos.NOMBRE_PRODUCTO_MAX));
 
-        BigDecimal precio = leerPrecio(datos.precio(), errores);
+        ReglasCampos.Campo<BigDecimal> precio = ReglasCampos.precio(datos.precio());
+        anadir(errores, precio.error());
 
-        Integer stock = leerEntero(datos.stock(), "stock", errores);
-        if (stock != null && stock < 0) {
+        ReglasCampos.Campo<Integer> stock = ReglasCampos.entero(datos.stock(), "stock");
+        anadir(errores, stock.error());
+        if (stock.esValido() && stock.valor() < 0) {
             errores.add("el stock no puede ser negativo");
         }
-        Integer categoriaId = leerEntero(datos.categoriaId(), "categoriaId", errores);
-        if (categoriaId != null && categoriaId <= 0) {
-            errores.add("categoriaId debe ser un entero positivo");
-        }
-        Integer proveedorId = leerEntero(datos.proveedorId(), "proveedorId", errores);
-        if (proveedorId != null && proveedorId <= 0) {
-            errores.add("proveedorId debe ser un entero positivo");
-        }
+        ReglasCampos.Campo<Integer> categoriaId = ReglasCampos.enteroPositivo(datos.categoriaId(), "categoriaId");
+        anadir(errores, categoriaId.error());
+        ReglasCampos.Campo<Integer> proveedorId = ReglasCampos.enteroPositivo(datos.proveedorId(), "proveedorId");
+        anadir(errores, proveedorId.error());
 
         if (errores.size() > erroresIniciales) {
             return null;
         }
-        return new Producto(codigo, nombre, precio, stock, categoriaId, proveedorId);
+        return new Producto(codigo, nombre, precio.valor(), stock.valor(), categoriaId.valor(), proveedorId.valor());
     }
 
     /**
-     * Quita los espacios extremos y pasa el código a mayúsculas.
-     * @return el código normalizado, o {@code null} si no hay código
+     * UT2 · Vuelve a validar un producto que ya está en memoria antes de copiarlo a MySQL.
+     * <p>Se pasa a texto para reutilizar exactamente las mismas reglas que al importar
+     * un fichero; así no hay dos versiones de la validación que puedan divergir.</p>
      */
+    public Producto validar(Producto producto, List<String> errores) {
+        DatosProducto datos = new DatosProducto(0, producto.getCodigo(), producto.getNombre(),
+                producto.getPrecio() == null ? null : producto.getPrecio().toPlainString(),
+                String.valueOf(producto.getStock()), String.valueOf(producto.getCategoriaId()),
+                String.valueOf(producto.getProveedorId()));
+        return validar(datos, errores);
+    }
+
+    /** Se mantiene por compatibilidad con el código de la UT1. @see ReglasCampos#normalizarCodigo */
     public static String normalizarCodigo(String codigo) {
-        if (codigo == null || codigo.isBlank()) {
-            return null;
-        }
-        return codigo.trim().toUpperCase(Locale.ROOT);
+        return ReglasCampos.normalizarCodigo(codigo);
     }
 
-    /**
-     * Convierte el precio a BigDecimal, comprueba que es mayor que 0 y que cabe en
-     * DECIMAL(10,2), y lo devuelve siempre con 2 decimales (14.5 → 14.50, 1E+3 → 1000.00).
-     * <p>Sin el límite de tamaño, un precio como 1E999999999 se aceptaría y, al
-     * mostrarlo o exportarlo, toPlainString() intentaría crear un texto de mil
-     * millones de cifras y agotaría la memoria.</p>
-     */
-    private BigDecimal leerPrecio(String texto, List<String> errores) {
-        if (texto == null || texto.isBlank()) {
-            errores.add("el precio es obligatorio");
-            return null;
-        }
-        try {
-            BigDecimal precio = new BigDecimal(texto.trim());
-            if (precio.compareTo(BigDecimal.ZERO) <= 0) {
-                errores.add("el precio debe ser mayor que 0");
-                return null;
-            }
-            BigDecimal sinCeros = precio.stripTrailingZeros();
-            // Se calcula con long: con escalas extremas, precision - scale desborda un int.
-            long cifrasEnteras = (long) sinCeros.precision() - sinCeros.scale();
-            if (cifrasEnteras > PRECIO_MAX_ENTEROS) {
-                errores.add("el precio no puede superar 99999999.99");
-                return null;
-            }
-            if (sinCeros.scale() > PRECIO_DECIMALES) {
-                errores.add("el precio admite como máximo " + PRECIO_DECIMALES + " decimales (" + texto.trim() + ")");
-                return null;
-            }
-            return precio.setScale(PRECIO_DECIMALES, RoundingMode.UNNECESSARY);
-        } catch (NumberFormatException ex) {
-            errores.add("el precio no es un número válido (" + texto + ")");
-            return null;
-        }
-    }
-
-    /** Convierte un campo entero; si falta o no es entero, añade el error y devuelve null. */
-    private Integer leerEntero(String texto, String campo, List<String> errores) {
-        if (texto == null || texto.isBlank()) {
-            errores.add(campo + " es obligatorio");
-            return null;
-        }
-        try {
-            return Integer.parseInt(texto.trim());
-        } catch (NumberFormatException ex) {
-            errores.add(campo + " debe ser un número entero (" + texto + ")");
-            return null;
+    private static void anadir(List<String> errores, String error) {
+        if (error != null) {
+            errores.add(error);
         }
     }
 }
