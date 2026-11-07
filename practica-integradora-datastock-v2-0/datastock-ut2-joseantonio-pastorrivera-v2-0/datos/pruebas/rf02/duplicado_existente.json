@@ -1,0 +1,6 @@
+{
+  "productos": [
+    {"codigo":"tec-001","nombre":"Teclado que intenta sustituir al existente","precio":99.99,"stock":1,"categoriaId":1,"proveedorId":1},
+    {"codigo":"HUB-301","nombre":"Hub USB 4 puertos","precio":12.99,"stock":20,"categoriaId":1,"proveedorId":2}
+  ]
+}

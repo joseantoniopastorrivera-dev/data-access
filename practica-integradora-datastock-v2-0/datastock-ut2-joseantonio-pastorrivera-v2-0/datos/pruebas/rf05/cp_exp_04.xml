@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo>
+  <producto>
+    <codigo>RAT-002</codigo>
+    <nombre>Ratón inalámbrico</nombre>
+    <precio>14.50</precio>
+    <stock>25</stock>
+    <categoriaId>1</categoriaId>
+    <proveedorId>1</proveedorId>
+  </producto>
+  <producto>
+    <codigo>TEC-001</codigo>
+    <nombre>Teclado USB</nombre>
+    <precio>19.95</precio>
+    <stock>12</stock>
+    <categoriaId>1</categoriaId>
+    <proveedorId>1</proveedorId>
+  </producto>
+</catalogo>

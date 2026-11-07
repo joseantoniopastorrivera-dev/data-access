@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalogo>
+  <producto>
+    <codigo>TEC-001</codigo><nombre>Teclado repetido desde XML</nombre>
+    <precio>21.00</precio><stock>3</stock>
+    <categoriaId>1</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+  <producto>
+    <codigo>MIC-901</codigo><nombre>Micrófono USB</nombre>
+    <precio>49.99</precio><stock>8</stock>
+    <categoriaId>3</categoriaId><proveedorId>2</proveedorId>
+  </producto>
+</catalogo>

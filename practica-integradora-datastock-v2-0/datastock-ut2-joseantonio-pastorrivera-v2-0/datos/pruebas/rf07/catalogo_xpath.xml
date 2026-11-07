@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Catálogo para RF-FIC-07: incluye un precio exactamente 100 y un producto con datos incorrectos -->
+<catalogo>
+  <producto>
+    <codigo>TEC-001</codigo><nombre>Teclado USB</nombre>
+    <precio>19.95</precio><stock>12</stock>
+    <categoriaId>1</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+  <producto>
+    <codigo>MON-003</codigo><nombre>Monitor 24 pulgadas</nombre>
+    <precio>149.99</precio><stock>8</stock>
+    <categoriaId>2</categoriaId><proveedorId>2</proveedorId>
+  </producto>
+  <producto>
+    <codigo>IMP-100</codigo><nombre>Impresora de tinta</nombre>
+    <precio>100.00</precio><stock>3</stock>
+    <categoriaId>5</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+  <producto>
+    <codigo>RAT-002</codigo><nombre>Ratón inalámbrico</nombre>
+    <precio>14.50</precio><stock>25</stock>
+    <categoriaId>1</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+  <producto>
+    <codigo>ERR-999</codigo><nombre>Producto con precio incorrecto</nombre>
+    <precio>abc</precio><stock>1</stock>
+    <categoriaId>3</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+</catalogo>

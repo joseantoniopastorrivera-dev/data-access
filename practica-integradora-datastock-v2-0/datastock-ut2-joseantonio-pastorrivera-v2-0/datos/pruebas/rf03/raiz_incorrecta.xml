@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos>
+  <producto>
+    <codigo>RAI-001</codigo><nombre>Raíz incorrecta</nombre>
+    <precio>1.00</precio><stock>1</stock>
+    <categoriaId>1</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+</productos>
