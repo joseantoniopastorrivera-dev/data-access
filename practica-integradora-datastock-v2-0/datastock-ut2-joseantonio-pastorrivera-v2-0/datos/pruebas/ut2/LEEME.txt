@@ -1,0 +1,5 @@
+Pruebas de la UT2 (JDBC y SQLite)
+- recorrido-6-1.json: los tres productos del ejemplo guiado del apartado 6.1 (MON-003 usa el proveedor 3, que al principio no existe).
+- lote-cp17.json: CP-JDBC-17. TEC-001 duplicado, ALF-017 válido, CAB-017 con categoría 99 inexistente y WEB-017 con proveedor 77 inexistente.
+- lote-cp18.json: CP-JDBC-18. Dos productos válidos; se importa con -Ddatastock.simularFalloLote=true para forzar un error SQL y comprobar el rollback.
+- cp-*.txt: salidas de consola guardadas como evidencia.

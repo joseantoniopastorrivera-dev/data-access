@@ -1,0 +1,8 @@
+{
+  "productos": [
+    {"codigo":"TEC-001","nombre":"Teclado mecánico","precio":49.90,"stock":10,"categoriaId":1,"proveedorId":1},
+    {"codigo":"ALF-017","nombre":"Alfombrilla gaming","precio":12.50,"stock":40,"categoriaId":1,"proveedorId":1},
+    {"codigo":"CAB-017","nombre":"Cable HDMI 2 m","precio":7.99,"stock":60,"categoriaId":99,"proveedorId":1},
+    {"codigo":"WEB-017","nombre":"Webcam Full HD","precio":39.00,"stock":12,"categoriaId":1,"proveedorId":77}
+  ]
+}

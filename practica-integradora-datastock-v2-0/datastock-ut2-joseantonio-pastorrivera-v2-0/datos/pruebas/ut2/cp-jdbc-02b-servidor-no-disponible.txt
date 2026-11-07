@@ -1,0 +1,62 @@
+
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+COMPROBAR CONEXIÓN
+------------------------------------------------
+Configuración leída de: variables de entorno y config\db.properties
+[ERROR] No se puede conectar con el servidor MySQL. Comprueba que está arrancado y que el host y el puerto de la URL son correctos.
+Pulsa Intro para continuar...
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: Hasta pronto.
