@@ -1,0 +1,331 @@
+
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE PRODUCTO
+------------------------------------------------
+Código (1-12: A-Z, 0-9 y -; Intro = cancelar): [ERROR] El código solo admite letras A-Z, dígitos y guiones.
+Código (1-12: A-Z, 0-9 y -; Intro = cancelar): [ERROR] El código no puede superar 12 caracteres.
+Código (1-12: A-Z, 0-9 y -; Intro = cancelar): Nombre (3-100 caracteres): [ERROR] El nombre debe tener entre 3 y 100 caracteres.
+Nombre (3-100 caracteres): Precio (mayor que 0, máximo 2 decimales, ej. 49.90): [ERROR] El precio debe ser mayor que 0.
+Precio (mayor que 0, máximo 2 decimales, ej. 49.90): [ERROR] El precio debe ser mayor que 0.
+Precio (mayor que 0, máximo 2 decimales, ej. 49.90): [ERROR] El precio admite como máximo 2 decimales (12.345).
+Precio (mayor que 0, máximo 2 decimales, ej. 49.90): Stock inicial (entero, 0 o más): [ERROR] El stock no puede ser negativo.
+Stock inicial (entero, 0 o más): ID de categoría: ID de proveedor: [OK] Producto HUB-005 guardado correctamente.
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+CONSULTAR PRODUCTO
+------------------------------------------------
+Código (Intro = cancelar): Código: HUB-005
+Nombre: Hub USB 4 puertos
+Precio: 15.50 €
+Stock: 30
+Categoría: 3 - Cables
+Proveedor: 4 - Sin Correo SL
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE PRODUCTO
+------------------------------------------------
+Código (1-12: A-Z, 0-9 y -; Intro = cancelar): [ERROR] El producto TEC-001 ya existe en MySQL. No se sobrescribe.
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE PRODUCTO
+------------------------------------------------
+Código (1-12: A-Z, 0-9 y -; Intro = cancelar): Nombre (3-100 caracteres): Precio (mayor que 0, máximo 2 decimales, ej. 49.90): Stock inicial (entero, 0 o más): ID de categoría: [ERROR] No existe la categoría con ID 99. Dala de alta antes en el menú de categorías (integridad referencial). No se ha guardado nada.
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+MODIFICAR PRODUCTO
+------------------------------------------------
+Código (Intro = cancelar): Código: HUB-005
+Nombre: Hub USB 4 puertos
+Precio: 15.50 €
+Stock: 30
+Categoría: 3 - Cables
+Proveedor: 4 - Sin Correo SL
+Pulsa Intro para conservar cada valor. El código y el stock no se modifican aquí:
+el stock solo cambia con el menú 6 (entradas y salidas), para que quede en el historial.
+Nombre [Hub USB 4 puertos] (Intro = conservar): Precio [15.50] (Intro = conservar): ID de categoría [3] (Intro = conservar): ID de proveedor [4] (Intro = conservar): [AVISO] ¿Guardar los cambios de HUB-005? (S/N): [OK] Producto HUB-005 actualizado.
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+CONSULTAR PRODUCTO
+------------------------------------------------
+Código (Intro = cancelar): Código: HUB-005
+Nombre: Hub USB-C 4 puertos
+Precio: 17.90 €
+Stock: 30
+Categoría: 3 - Cables
+Proveedor: 4 - Sin Correo SL
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+ELIMINAR PRODUCTO
+------------------------------------------------
+Código (Intro = cancelar): Código: HUB-005
+Nombre: Hub USB-C 4 puertos
+Precio: 17.90 €
+Stock: 30
+Categoría: 3 - Cables
+Proveedor: 4 - Sin Correo SL
+[AVISO] ¿Confirmas la eliminación? (S/N): [AVISO] Eliminación cancelada. El producto se conserva.
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+ELIMINAR PRODUCTO
+------------------------------------------------
+Código (Intro = cancelar): Código: TEC-001
+Nombre: Teclado mecánico
+Precio: 49.90 €
+Stock: 11
+Categoría: 1 - Periféricos
+Proveedor: 1 - Distribuciones Norte
+[AVISO] ¿Confirmas la eliminación? (S/N): [ERROR] No se puede eliminar TEC-001: tiene movimientos de stock en el historial. Se conserva el producto y su historial.
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+ELIMINAR PRODUCTO
+------------------------------------------------
+Código (Intro = cancelar): Código: HUB-005
+Nombre: Hub USB-C 4 puertos
+Precio: 17.90 €
+Stock: 30
+Categoría: 3 - Cables
+Proveedor: 4 - Sin Correo SL
+[AVISO] ¿Confirmas la eliminación? (S/N): [OK] Producto HUB-005 eliminado.
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+CONSULTAR PRODUCTO
+------------------------------------------------
+Código (Intro = cancelar): [AVISO] No existe ningún producto con el código HUB-005 en MySQL.
+Pulsa Intro para continuar...
+MENÚ DE PRODUCTOS
+------------------------------------------------
+1. Dar de alta un producto
+2. Consultar producto por código
+3. Modificar un producto
+4. Eliminar un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+BUSCAR POR NOMBRE
+------------------------------------------------
+Texto a buscar en el nombre (Intro = cancelar): CÓDIGO       NOMBRE                          PRECIO  STOCK CATEGORÍA        PROVEEDOR           
+TEC-001      Teclado mecánico               49.90 €     11 Periféricos      Distribuciones Norte
+Total de productos encontrados: 1
+Pulsa Intro para continuar...
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+BUSCAR POR NOMBRE
+------------------------------------------------
+Texto a buscar en el nombre (Intro = cancelar): [AVISO] Ningún producto contiene «zzz» en su nombre.
+Pulsa Intro para continuar...
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+BUSCAR POR NOMBRE
+------------------------------------------------
+Texto a buscar en el nombre (Intro = cancelar): [AVISO] Ningún producto contiene «50%» en su nombre.
+Pulsa Intro para continuar...
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+STOCK INFERIOR A UN UMBRAL
+------------------------------------------------
+Umbral (entero, 0 o más; Intro = cancelar): CÓDIGO       NOMBRE                          PRECIO  STOCK CATEGORÍA        PROVEEDOR           
+MON-003      Monitor 24 pulgadas           149.00 €      8 Monitores        Pantallas del Centro
+Total de productos encontrados: 1
+Pulsa Intro para continuar...
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+STOCK INFERIOR A UN UMBRAL
+------------------------------------------------
+Umbral (entero, 0 o más; Intro = cancelar): [AVISO] No hay productos con stock inferior a 0.
+Pulsa Intro para continuar...
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+STOCK INFERIOR A UN UMBRAL
+------------------------------------------------
+Umbral (entero, 0 o más; Intro = cancelar): [ERROR] El umbral no puede ser negativo.
+Umbral (entero, 0 o más; Intro = cancelar): CÓDIGO       NOMBRE                          PRECIO  STOCK CATEGORÍA        PROVEEDOR           
+MON-003      Monitor 24 pulgadas           149.00 €      8 Monitores        Pantallas del Centro
+TEC-001      Teclado mecánico               49.90 €     11 Periféricos      Distribuciones Norte
+RAT-002      Ratón inalámbrico              19.95 €     25 Periféricos      Distribuciones Norte
+Total de productos encontrados: 3
+Pulsa Intro para continuar...
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: Hasta pronto.

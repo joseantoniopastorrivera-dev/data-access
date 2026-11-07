@@ -1,0 +1,63 @@
+
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+===== IMPORTAR XML =====
+Ruta: Productos encontrados: 1
+Importados: 1 | Rechazados: 0
+Importación finalizada.
+Pulsa Intro para continuar...
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 1
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+---------- EXPORTAR PRODUCTOS ----------
+1. Exportar productos a JSON
+2. Exportar productos a XML
+0. Volver al menú principal
+Selecciona una opción: 
+===== EXPORTAR JSON =====
+Ruta de destino: Fichero generado correctamente.
+Ruta: C:\dev\data-access\practica-integradora-datastock-v2-0\datastock-ut2-joseantonio-pastorrivera-v2-0\datos\salidas\regresion-ut1.json
+Formato: JSON | Productos exportados: 1
+Pulsa Intro para continuar...
+---------- EXPORTAR PRODUCTOS ----------
+1. Exportar productos a JSON
+2. Exportar productos a XML
+0. Volver al menú principal
+Selecciona una opción: 
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 1
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: Hasta pronto.

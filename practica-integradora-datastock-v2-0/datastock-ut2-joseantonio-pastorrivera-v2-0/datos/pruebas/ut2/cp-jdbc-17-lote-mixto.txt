@@ -1,0 +1,137 @@
+
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+===== IMPORTAR JSON =====
+Ruta: Productos encontrados: 4
+Importados: 4 | Rechazados: 0
+Importación finalizada.
+Pulsa Intro para continuar...
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 4
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+IMPORTAR PRODUCTOS DE MEMORIA A MYSQL
+------------------------------------------------
+Productos disponibles en memoria: 4
+[AVISO] ¿Deseas importar estos productos a MySQL? (S/N): Iniciando comprobación de productos...
+Comprobando TEC-001 - Teclado mecánico...
+[AVISO] El producto ya existe en MySQL. Se omite.
+Comprobando ALF-017 - Alfombrilla gaming...
+[OK] Producto válido para importar.
+Comprobando CAB-017 - Cable HDMI 2 m...
+[ERROR] No existe la categoría con ID 99. El producto no se puede importar.
+Comprobando WEB-017 - Webcam Full HD...
+[ERROR] No existe el proveedor con ID 77. El producto no se puede importar.
+
+RESULTADO DE LA IMPORTACIÓN
+------------------------------------------------
+Productos analizados: 4
+Productos insertados: 1
+Omitidos por código duplicado: 1
+Rechazados por datos incorrectos: 2
+[OK] Importación finalizada. Los productos válidos se han guardado en MySQL (commit).
+El inventario en memoria no ha cambiado: sigue con 4 productos.
+Pulsa Intro para continuar...
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+PRODUCTOS ALMACENADOS EN MYSQL
+------------------------------------------------
+CÓDIGO       NOMBRE                          PRECIO  STOCK CATEGORÍA        PROVEEDOR           
+ALF-017      Alfombrilla gaming             12.50 €     40 Periféricos      Distribuciones Norte
+MON-003      Monitor 24 pulgadas           149.00 €      8 Monitores        Pantallas del Centro
+RAT-002      Ratón inalámbrico              19.95 €     25 Periféricos      Distribuciones Norte
+TEC-001      Teclado mecánico               49.90 €     11 Periféricos      Distribuciones Norte
+Total de productos encontrados: 4
+Pulsa Intro para continuar...
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 4
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: Hasta pronto.
