@@ -1,0 +1,8 @@
+{
+  "productos": [
+    {"codigo":"TEC-010","nombre":"TECLADO mecánico RGB","precio":59.90,"stock":7,"categoriaId":1,"proveedorId":1},
+    {"codigo":"FUN-011","nombre":"Funda para teclado","precio":9.95,"stock":20,"categoriaId":1,"proveedorId":2},
+    {"codigo":"ALF-012","nombre":"Alfombrilla XXL para ratón y teclado inalámbrico de oficina","precio":15.00,"stock":11,"categoriaId":1,"proveedorId":2},
+    {"codigo":"RAT-013","nombre":"Ratón vertical","precio":24.00,"stock":5,"categoriaId":1,"proveedorId":1}
+  ]
+}

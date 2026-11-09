@@ -1,0 +1,365 @@
+
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE CATEGORÍA
+------------------------------------------------
+ID de categoría (Intro = cancelar): [ERROR] Ya existe una categoría con el ID 1.
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE CATEGORÍA
+------------------------------------------------
+ID de categoría (Intro = cancelar): Nombre (1-60 caracteres): [ERROR] Ya existe otra categoría llamada «periféricos».
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE CATEGORÍA
+------------------------------------------------
+ID de categoría (Intro = cancelar): [ERROR] El identificador debe ser un entero positivo.
+ID de categoría (Intro = cancelar): [ERROR] El identificador debe ser un número entero (abc).
+ID de categoría (Intro = cancelar): Nombre (1-60 caracteres): [OK] Categoría registrada correctamente.
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE CATEGORÍA
+------------------------------------------------
+ID de categoría (Intro = cancelar): Nombre (1-60 caracteres): [ERROR] El nombre debe tener entre 1 y 60 caracteres.
+Nombre (1-60 caracteres): [OK] Categoría registrada correctamente.
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+LISTADO DE CATEGORÍAS
+------------------------------------------------
+ID     NOMBRE
+------------------------------------------------
+1      Periféricos
+2      Monitores
+3      Cables y adaptadores
+4      Temporal
+Total: 4
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+MODIFICAR CATEGORÍA
+------------------------------------------------
+ID de categoría (Intro = cancelar): Nombre actual: Cables y adaptadores
+Nuevo nombre (1-60 caracteres, Intro = cancelar): [AVISO] ¿Cambiar «Cables y adaptadores» por «Cables»? (S/N): [OK] Categoría 3 actualizada.
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+MODIFICAR CATEGORÍA
+------------------------------------------------
+ID de categoría (Intro = cancelar): [ERROR] No existe ninguna categoría con el ID 99.
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+ELIMINAR CATEGORÍA
+------------------------------------------------
+ID de categoría (Intro = cancelar): ID: 1 | Nombre: Periféricos
+[AVISO] ¿Confirmas la eliminación? (S/N): [ERROR] Error de base de datos (código 1217, SQLState 23000).
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+ELIMINAR CATEGORÍA
+------------------------------------------------
+ID de categoría (Intro = cancelar): ID: 4 | Nombre: Temporal
+[AVISO] ¿Confirmas la eliminación? (S/N): [AVISO] Eliminación cancelada. La categoría se conserva.
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+ELIMINAR CATEGORÍA
+------------------------------------------------
+ID de categoría (Intro = cancelar): ID: 4 | Nombre: Temporal
+[AVISO] ¿Confirmas la eliminación? (S/N): [OK] Categoría 4 eliminada.
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+LISTADO DE CATEGORÍAS
+------------------------------------------------
+ID     NOMBRE
+------------------------------------------------
+1      Periféricos
+2      Monitores
+3      Cables
+Total: 3
+Pulsa Intro para continuar...
+MENÚ DE CATEGORÍAS
+------------------------------------------------
+1. Dar de alta una categoría
+2. Listar categorías
+3. Modificar el nombre de una categoría
+4. Eliminar una categoría
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE PROVEEDOR
+------------------------------------------------
+ID de proveedor (Intro = cancelar): Nombre (máximo 100 caracteres): Email (opcional, Intro = sin correo): [OK] Proveedor registrado correctamente.
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE PROVEEDOR
+------------------------------------------------
+ID de proveedor (Intro = cancelar): Nombre (máximo 100 caracteres): Email (opcional, Intro = sin correo): [ERROR] El correo ventas@distribuciones.example ya está registrado en otro proveedor.
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE PROVEEDOR
+------------------------------------------------
+ID de proveedor (Intro = cancelar): Nombre (máximo 100 caracteres): Email (opcional, Intro = sin correo): [ERROR] El correo no tiene un formato válido (ejemplo: ventas@empresa.es).
+Email (opcional, Intro = sin correo): [OK] Proveedor registrado correctamente.
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+LISTADO DE PROVEEDORES
+------------------------------------------------
+ID     NOMBRE                           EMAIL
+------------------------------------------------
+1      Distribuciones Norte             ventas@distribuciones.example
+3      Pantallas del Centro             contacto@pantallas.example
+4      Sin Correo SL                    —
+5      Otro                             otro@ejemplo.es
+Total: 4
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+MODIFICAR PROVEEDOR
+------------------------------------------------
+ID de proveedor (Intro = cancelar): Nombre actual: Otro
+Email actual: otro@ejemplo.es
+Pulsa Intro para conservar cada dato. En el email, escribe - para dejarlo sin valor.
+Nombre [Otro] (Intro = conservar): Email [otro@ejemplo.es] (Intro = conservar, - = sin correo): [AVISO] ¿Guardar los cambios del proveedor 5? (S/N): [OK] Proveedor 5 actualizado.
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+MODIFICAR PROVEEDOR
+------------------------------------------------
+ID de proveedor (Intro = cancelar): Nombre actual: Sin Correo SL
+Email actual: —
+Pulsa Intro para conservar cada dato. En el email, escribe - para dejarlo sin valor.
+Nombre [Sin Correo SL] (Intro = conservar): Email [—] (Intro = conservar, - = sin correo): [ERROR] El correo contacto@pantallas.example ya está registrado en otro proveedor.
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+ELIMINAR PROVEEDOR
+------------------------------------------------
+ID de proveedor (Intro = cancelar): ID: 1 | Nombre: Distribuciones Norte | Email: ventas@distribuciones.example
+[AVISO] ¿Confirmas la eliminación? (S/N): [ERROR] Error de base de datos (código 1217, SQLState 23000).
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+ELIMINAR PROVEEDOR
+------------------------------------------------
+ID de proveedor (Intro = cancelar): ID: 5 | Nombre: Otro | Email: —
+[AVISO] ¿Confirmas la eliminación? (S/N): [OK] Proveedor 5 eliminado.
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+LISTADO DE PROVEEDORES
+------------------------------------------------
+ID     NOMBRE                           EMAIL
+------------------------------------------------
+1      Distribuciones Norte             ventas@distribuciones.example
+3      Pantallas del Centro             contacto@pantallas.example
+4      Sin Correo SL                    —
+Total: 3
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: Hasta pronto.

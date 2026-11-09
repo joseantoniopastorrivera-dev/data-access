@@ -1,0 +1,6 @@
+Ficheros de muestra para empezar a probar las importaciones.
+- catalogo_valido.json: dos productos válidos.
+- catalogo_valido.xml: un producto válido adicional.
+- catalogo_con_errores.json: precio negativo y código duplicado.
+- catalogo_malformado.json: sintaxis JSON incorrecta intencionadamente.
+No se deben modificar las muestras originales al probar exportaciones.

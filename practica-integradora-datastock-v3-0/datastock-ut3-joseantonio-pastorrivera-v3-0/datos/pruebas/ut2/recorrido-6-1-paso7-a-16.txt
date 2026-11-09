@@ -1,0 +1,381 @@
+
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+---------- CONSULTA DE PRODUCTOS ----------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+0. Volver al menú principal
+Selecciona una opción: El inventario está vacío. Importa un catálogo JSON o XML (opciones 2 y 3) o recupera un .dat (opción 6).
+Pulsa Intro para continuar...
+---------- CONSULTA DE PRODUCTOS ----------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+0. Volver al menú principal
+Selecciona una opción: 
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+PRODUCTOS ALMACENADOS EN MYSQL
+------------------------------------------------
+CÓDIGO       NOMBRE                          PRECIO  STOCK CATEGORÍA        PROVEEDOR           
+RAT-002      Ratón inalámbrico              19.95 €     25 Periféricos      Distribuciones Norte
+TEC-001      Teclado mecánico               49.90 €     10 Periféricos      Distribuciones Norte
+Total de productos encontrados: 2
+Pulsa Intro para continuar...
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+ALTA DE PROVEEDOR
+------------------------------------------------
+ID de proveedor (Intro = cancelar): Nombre (máximo 100 caracteres): Email (opcional, Intro = sin correo): [OK] Proveedor registrado correctamente.
+Pulsa Intro para continuar...
+MENÚ DE PROVEEDORES
+------------------------------------------------
+1. Dar de alta un proveedor
+2. Listar proveedores
+3. Modificar un proveedor
+4. Eliminar un proveedor
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+===== IMPORTAR JSON =====
+Ruta: Productos encontrados: 3
+Importados: 3 | Rechazados: 0
+Importación finalizada.
+Pulsa Intro para continuar...
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 3
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+IMPORTAR PRODUCTOS DE MEMORIA A MYSQL
+------------------------------------------------
+Productos disponibles en memoria: 3
+[AVISO] ¿Deseas importar estos productos a MySQL? (S/N): Iniciando comprobación de productos...
+Comprobando TEC-001 - Teclado mecánico...
+[AVISO] El producto ya existe en MySQL. Se omite.
+Comprobando RAT-002 - Ratón inalámbrico...
+[AVISO] El producto ya existe en MySQL. Se omite.
+Comprobando MON-003 - Monitor 24 pulgadas...
+[OK] Producto válido para importar.
+
+RESULTADO DE LA IMPORTACIÓN
+------------------------------------------------
+Productos analizados: 3
+Productos insertados: 1
+Omitidos por código duplicado: 2
+Rechazados por datos incorrectos: 0
+[OK] Importación finalizada. Los productos válidos se han guardado en MySQL (commit).
+El inventario en memoria no ha cambiado: sigue con 3 productos.
+Pulsa Intro para continuar...
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+PRODUCTOS ALMACENADOS EN MYSQL
+------------------------------------------------
+CÓDIGO       NOMBRE                          PRECIO  STOCK CATEGORÍA        PROVEEDOR           
+MON-003      Monitor 24 pulgadas           149.00 €      8 Monitores        Pantallas del Centro
+RAT-002      Ratón inalámbrico              19.95 €     25 Periféricos      Distribuciones Norte
+TEC-001      Teclado mecánico               49.90 €     10 Periféricos      Distribuciones Norte
+Total de productos encontrados: 3
+Pulsa Intro para continuar...
+MENÚ DE CONSULTAS
+------------------------------------------------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+4. Consultar productos con stock inferior a un umbral
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE MOVIMIENTOS
+------------------------------------------------
+1. Registrar una ENTRADA de stock
+2. Registrar una SALIDA de stock
+0. Volver al menú MySQL
+Selecciona una opción: 
+REGISTRAR ENTRADA
+------------------------------------------------
+Código de producto (Intro = cancelar): Producto: Teclado mecánico | Stock actual: 10
+Cantidad (entero mayor que 0): [AVISO] ¿Registrar ENTRADA de 5 unidades de TEC-001? (S/N): [OK] Movimiento 1 registrado: ENTRADA de 5 unidades. Stock anterior 10 -> posterior 15.
+Pulsa Intro para continuar...
+MENÚ DE MOVIMIENTOS
+------------------------------------------------
+1. Registrar una ENTRADA de stock
+2. Registrar una SALIDA de stock
+0. Volver al menú MySQL
+Selecciona una opción: 
+REGISTRAR SALIDA
+------------------------------------------------
+Código de producto (Intro = cancelar): Producto: Teclado mecánico | Stock actual: 15
+Cantidad (entero mayor que 0): [AVISO] ¿Registrar SALIDA de 4 unidades de TEC-001? (S/N): [OK] Movimiento 2 registrado: SALIDA de 4 unidades. Stock anterior 15 -> posterior 11.
+Pulsa Intro para continuar...
+MENÚ DE MOVIMIENTOS
+------------------------------------------------
+1. Registrar una ENTRADA de stock
+2. Registrar una SALIDA de stock
+0. Volver al menú MySQL
+Selecciona una opción: 
+REGISTRAR SALIDA
+------------------------------------------------
+Código de producto (Intro = cancelar): Producto: Teclado mecánico | Stock actual: 11
+Cantidad (entero mayor que 0): [AVISO] ¿Registrar SALIDA de 20 unidades de TEC-001? (S/N): [ERROR] Stock insuficiente. El stock permanece en 11 y no se ha creado ningún movimiento.
+Pulsa Intro para continuar...
+MENÚ DE MOVIMIENTOS
+------------------------------------------------
+1. Registrar una ENTRADA de stock
+2. Registrar una SALIDA de stock
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+MENÚ DE HISTORIAL
+------------------------------------------------
+1. Consultar todos los movimientos
+2. Consultar movimientos de un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+HISTORIAL COMPLETO
+------------------------------------------------
+ID     FECHA               PRODUCTO     TIPO     CANTIDAD  ANTERIOR  POSTERIOR
+1      07/11/2026 00:46:14 TEC-001      ENTRADA         5        10         15
+2      07/11/2026 00:46:15 TEC-001      SALIDA          4        15         11
+Total de movimientos: 2
+Pulsa Intro para continuar...
+MENÚ DE HISTORIAL
+------------------------------------------------
+1. Consultar todos los movimientos
+2. Consultar movimientos de un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+HISTORIAL DE UN PRODUCTO
+------------------------------------------------
+Código de producto (Intro = cancelar): Producto: Teclado mecánico | Stock actual: 11
+ID     FECHA               PRODUCTO     TIPO     CANTIDAD  ANTERIOR  POSTERIOR
+1      07/11/2026 00:46:14 TEC-001      ENTRADA         5        10         15
+2      07/11/2026 00:46:15 TEC-001      SALIDA          4        15         11
+Total de movimientos: 2
+Pulsa Intro para continuar...
+MENÚ DE HISTORIAL
+------------------------------------------------
+1. Consultar todos los movimientos
+2. Consultar movimientos de un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+HISTORIAL DE UN PRODUCTO
+------------------------------------------------
+Código de producto (Intro = cancelar): Producto: Ratón inalámbrico | Stock actual: 25
+[AVISO] Sin movimientos registrados.
+Pulsa Intro para continuar...
+MENÚ DE HISTORIAL
+------------------------------------------------
+1. Consultar todos los movimientos
+2. Consultar movimientos de un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+HISTORIAL DE UN PRODUCTO
+------------------------------------------------
+Código de producto (Intro = cancelar): [ERROR] No existe ningún producto con el código NOEXISTE.
+Pulsa Intro para continuar...
+MENÚ DE HISTORIAL
+------------------------------------------------
+1. Consultar todos los movimientos
+2. Consultar movimientos de un producto
+0. Volver al menú MySQL
+Selecciona una opción: 
+================================================
+               GESTIÓN MYSQL - UT2
+================================================
+1. Comprobar conexión y mostrar información de la BD
+2. Gestionar categorías
+3. Gestionar proveedores
+4. Gestionar productos (CRUD)
+5. Consultar y buscar productos
+6. Registrar entrada o salida de stock
+7. Consultar historial de movimientos
+8. Importar productos de memoria a MySQL
+9. Demostración de transacción con commit/rollback
+0. Volver al menú principal
+Selecciona una opción: 
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+           FASE 2 - UT1 + UT2 (MySQL)
+================================================
+Productos en memoria (UT1): 3
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: Hasta pronto.

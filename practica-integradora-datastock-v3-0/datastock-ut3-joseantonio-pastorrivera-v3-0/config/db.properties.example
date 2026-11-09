@@ -1,0 +1,7 @@
+# Plantilla de configuración JDBC de DataStock (UT2).
+# 1. Copia este fichero como config/db.properties (ese nombre está en .gitignore).
+# 2. Escribe tu usuario y tu contraseña de MySQL.
+# Las variables de entorno JDBC_URL, JDBC_USER y JDBC_PASSWORD, si existen, tienen prioridad.
+jdbc.url=jdbc:mysql://localhost:3306/datastock?serverTimezone=Europe/Madrid&connectTimeout=5000
+jdbc.user=root
+jdbc.password=ESCRIBE_AQUI_TU_CONTRASENA
