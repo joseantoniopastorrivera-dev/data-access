@@ -1,0 +1,88 @@
+
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+      FASE 3 - UT1 + UT2 (MySQL) + UT3
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+===== IMPORTAR JSON =====
+Ruta: Productos encontrados: 2
+Importados: 2 | Rechazados: 0
+[OK] Importación finalizada. Productos añadidos al inventario: 2.
+Pulsa Intro para continuar...
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+      FASE 3 - UT1 + UT2 (MySQL) + UT3
+================================================
+Productos en memoria (UT1): 2
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+===== IMPORTAR JSON =====
+Ruta: Productos encontrados: 3
+Importados: 1 | Rechazados: 2
+INCIDENCIAS:
+  - Producto 1 (TEC-004): el precio debe ser mayor que 0
+  - Producto 3 (CAB-005): código duplicado dentro del mismo fichero
+[OK] Importación finalizada. Productos añadidos al inventario: 1.
+[AVISO] Productos rechazados: 2. Revisa las incidencias.
+Pulsa Intro para continuar...
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+      FASE 3 - UT1 + UT2 (MySQL) + UT3
+================================================
+Productos en memoria (UT1): 3
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+---------- CONSULTA DE PRODUCTOS ----------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+0. Volver al menú principal
+Selecciona una opción: CÓDIGO       NOMBRE                               PRECIO  STOCK  CAT. PROV.
+CAB-005      Cable USB                            7.99 €     30     1     1
+RAT-002      Ratón inalámbrico                   14.50 €     25     1     1
+TEC-001      Teclado USB                         19.95 €     12     1     1
+Total: 3 productos
+Pulsa Intro para continuar...
+---------- CONSULTA DE PRODUCTOS ----------
+1. Listar todos los productos
+2. Buscar producto por código
+3. Buscar productos por nombre
+0. Volver al menú principal
+Selecciona una opción: 
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+      FASE 3 - UT1 + UT2 (MySQL) + UT3
+================================================
+Productos en memoria (UT1): 3
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: Hasta pronto.

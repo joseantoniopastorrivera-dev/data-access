@@ -1,0 +1,12 @@
+Pruebas de la UT3 (componentes reutilizables)
+Salidas de consola guardadas como evidencia de ejecución de las dos opciones integradas.
+Se ejecutaron con NO_COLOR=1 para que el texto sea legible. Con colores, [OK] sale en verde, [ERROR] en rojo y [AVISO] en amarillo.
+
+- cp-comp-01-importar-json-valido.txt: CP-COMP-01. Opción 2 con datos/ejemplos/catalogo_valido.json (2 válidos) y después con datos/ejemplos/catalogo_con_errores.json (1 válido y 2 rechazados). Al final, la opción 4.1 lista los 3 productos en memoria.
+- cp-comp-02-json-inexistente-y-malformado.txt: CP-COMP-02. Opción 2 con un fichero que no existe y con datos/ejemplos/catalogo_malformado.json. Los dos dan [ERROR] controlado. Después se importa un JSON válido para demostrar que DataStock sigue funcionando.
+- cp-comp-03-buscar-codigo-mysql.txt: CP-COMP-03. Opción 7 > 5 > 2 con TEC-001 (existe: [OK] y ficha) y con zzz-999 (no existe: [AVISO]).
+- cp-comp-03b-mysql-no-disponible.txt: caso adicional de CP-COMP-03. Misma opción con JDBC_URL apuntando a un puerto sin servidor (3399): [ERROR] controlado, sin trazas de excepción.
+- regresion-ut1-ut2.txt: regresión. Opción 3 (XML), 4.2 (buscar en memoria), 5.1 (exportar JSON), 7.1 (conexión), 7.4.2 (consulta CRUD, que también usa el componente a través de ProductoDAO) y 7.7.2 (historial de un producto).
+- regresion-acceso-aleatorio-adaptador.txt: la actividad AccesoAleatorioActividad de la UT1 sigue cargando un JSON a través de ImportadorJson, que ahora delega en LectorProductosJson.
+
+Pruebas automatizadas (JUnit 5): src/test/java. Se ejecutan con "mvn test" (10 tests, 0 fallos).

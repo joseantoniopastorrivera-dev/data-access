@@ -1,0 +1,70 @@
+
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+      FASE 3 - UT1 + UT2 (MySQL) + UT3
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+===== IMPORTAR JSON =====
+Ruta: [ERROR] Importación cancelada: El fichero no existe: C:\dev\data-access\practica-integradora-datastock-v3-0\datastock-ut3-joseantonio-pastorrivera-v3-0\datos\pruebas\ut3\no_existe.json
+No se ha añadido ningún producto al inventario.
+Pulsa Intro para continuar...
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+      FASE 3 - UT1 + UT2 (MySQL) + UT3
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+===== IMPORTAR JSON =====
+Ruta: [ERROR] Importación cancelada: El fichero no es un JSON válido (línea 2, columna 1): revisa llaves, corchetes, comillas y comas.
+No se ha añadido ningún producto al inventario.
+Pulsa Intro para continuar...
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+      FASE 3 - UT1 + UT2 (MySQL) + UT3
+================================================
+Productos en memoria (UT1): 0
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: 
+===== IMPORTAR JSON =====
+Ruta: Productos encontrados: 2
+Importados: 2 | Rechazados: 0
+[OK] Importación finalizada. Productos añadidos al inventario: 2.
+Pulsa Intro para continuar...
+================================================
+         DATASTOCK - GESTIÓN DE INVENTARIO
+      FASE 3 - UT1 + UT2 (MySQL) + UT3
+================================================
+Productos en memoria (UT1): 2
+1. Explorar ficheros y directorios (UT1)
+2. Importar productos desde JSON (UT1)
+3. Importar productos desde XML (UT1)
+4. Consultar productos en memoria (UT1)
+5. Exportar productos (UT1)
+6. Guardar y recuperar inventario (UT1)
+7. Gestionar base de datos MySQL (UT2)
+0. Salir
+Selecciona una opción: Hasta pronto.

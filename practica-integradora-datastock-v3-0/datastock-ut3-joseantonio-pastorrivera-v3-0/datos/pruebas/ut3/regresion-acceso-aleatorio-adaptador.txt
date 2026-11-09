@@ -1,0 +1,11 @@
+===== ACCESO ALEATORIO =====
+Fichero binario de stock (p. ej. datos/salidas/stock.bin; Intro para salir): 
+Fichero: datos\salidas\stock_ut3.bin | Productos en memoria: 0
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: Catálogo JSON o XML: Importados: 2 | Rechazados: 0
+
+Fichero: datos\salidas\stock_ut3.bin | Productos en memoria: 2
+1. Cargar catálogo JSON/XML en memoria | 2. Generar fichero desde memoria
+3. Consultar posición | 4. Modificar stock | 5. Mostrar todos | 0. Salir
+Opción: Fin de la actividad.
