@@ -1,0 +1,6 @@
+{
+  "productos": [
+    {"codigo":"BIG-001","nombre":"Precio gigantesco","precio":1E999999999,"stock":1,"categoriaId":1,"proveedorId":1},
+    {"codigo":"OK-002","nombre":"Producto correcto","precio":10,"stock":1,"categoriaId":1,"proveedorId":1}
+  ]
+}

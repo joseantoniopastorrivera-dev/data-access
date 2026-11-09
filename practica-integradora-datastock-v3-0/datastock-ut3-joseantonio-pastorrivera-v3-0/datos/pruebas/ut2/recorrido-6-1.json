@@ -1,0 +1,7 @@
+{
+  "productos": [
+    {"codigo":"TEC-001","nombre":"Teclado mecánico","precio":49.90,"stock":10,"categoriaId":1,"proveedorId":1},
+    {"codigo":"RAT-002","nombre":"Ratón inalámbrico","precio":19.95,"stock":25,"categoriaId":1,"proveedorId":1},
+    {"codigo":"MON-003","nombre":"Monitor 24 pulgadas","precio":149.00,"stock":8,"categoriaId":2,"proveedorId":3}
+  ]
+}

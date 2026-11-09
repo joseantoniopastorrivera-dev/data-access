@@ -1,0 +1,47 @@
+===== CONSULTAS XPATH =====
+Fichero XML (Intro para salir): datos/pruebas/rf03/con_dtd_entidad_externa.xml
+El XML contiene una declaración DOCTYPE (DTD o entidades); se rechaza por seguridad.
+Fichero XML (Intro para salir): datos/pruebas/rf07/catalogo_xpath.xml
+Fichero abierto: datos/pruebas/rf07/catalogo_xpath.xml
+
+1. Por código | 2. Por categoría | 3. Precio superior | 4. Contar | 0. Salir
+Opción: 1
+Código:  mon-003 
+MON-003    Monitor 24 pulgadas                149.99 € | categoría 2
+Productos encontrados: 1
+
+1. Por código | 2. Por categoría | 3. Precio superior | 4. Contar | 0. Salir
+Opción: 1
+Código: ZZZ-999
+No hay coincidencias.
+
+1. Por código | 2. Por categoría | 3. Precio superior | 4. Contar | 0. Salir
+Opción: 2
+Categoría: 1
+TEC-001    Teclado USB                         19.95 € | categoría 1
+RAT-002    Ratón inalámbrico                   14.50 € | categoría 1
+Productos encontrados: 2
+
+1. Por código | 2. Por categoría | 3. Precio superior | 4. Contar | 0. Salir
+Opción: 2
+Categoría: abc
+La categoría debe ser un entero positivo.
+
+1. Por código | 2. Por categoría | 3. Precio superior | 4. Contar | 0. Salir
+Opción: 3
+Precio mínimo: 100
+MON-003    Monitor 24 pulgadas                149.99 € | categoría 2
+Productos encontrados: 1
+
+1. Por código | 2. Por categoría | 3. Precio superior | 4. Contar | 0. Salir
+Opción: 3
+Precio mínimo: cien
+El precio debe ser un número (usa punto decimal).
+
+1. Por código | 2. Por categoría | 3. Precio superior | 4. Contar | 0. Salir
+Opción: 4
+Productos en el catálogo: 5
+
+1. Por código | 2. Por categoría | 3. Precio superior | 4. Contar | 0. Salir
+Opción: 0
+Fin de las consultas.

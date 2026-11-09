@@ -1,0 +1,16 @@
+== Ejecución 1
+[OK] Conexión SQLite abierta: datos/sqlite/productos_demo.db (fichero creado ahora)
+[OK] Tabla producto_demo disponible.
+Insertados: 2 | Ya existentes: 0
+SQL-001 | Producto demo A
+SQL-002 | Producto demo B
+Filas en producto_demo: 2
+[OK] Recursos cerrados. El fichero persiste: C:\dev\data-access\practica-integradora-datastock-v2-0\datastock-ut2-joseantonio-pastorrivera-v2-0\datos\sqlite\productos_demo.db (12288 bytes)
+== Ejecución 2
+[OK] Conexión SQLite abierta: datos/sqlite/productos_demo.db (fichero existente)
+[OK] Tabla producto_demo disponible.
+Insertados: 0 | Ya existentes: 2
+SQL-001 | Producto demo A
+SQL-002 | Producto demo B
+Filas en producto_demo: 2
+[OK] Recursos cerrados. El fichero persiste: C:\dev\data-access\practica-integradora-datastock-v2-0\datastock-ut2-joseantonio-pastorrivera-v2-0\datos\sqlite\productos_demo.db (12288 bytes)

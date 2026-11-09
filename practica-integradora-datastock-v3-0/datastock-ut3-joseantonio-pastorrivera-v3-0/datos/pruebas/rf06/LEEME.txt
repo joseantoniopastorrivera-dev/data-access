@@ -1,0 +1,10 @@
+Ficheros de prueba de RF-FIC-06 (recuperar inventario serializado):
+- inventario_cinco.dat: inventario de 5 productos guardado con la opción 6 → 1 (CP-SER-01 y CP-SER-02).
+- truncado.dat: los primeros 200 bytes de un .dat válido; simula un fichero dañado (CP-SER-03).
+- texto_plano.dat: un fichero de texto con extensión .dat.
+- clase_no_permitida.dat: un HashMap serializado; el filtro de deserialización lo rechaza.
+- precio_negativo.dat: lista de productos con un precio manipulado (-5); lo rechaza la validación.
+- codigo_repetido.dat: dos productos con el mismo código (TEC-001 y tec-001).
+- no_es_lista.dat: un String serializado en lugar de una lista.
+Los cuatro últimos se generaron con un programa auxiliar externo al proyecto que escribe esos objetos
+con ObjectOutputStream. En todos los casos la recuperación se cancela y el inventario no cambia.

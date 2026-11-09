@@ -1,0 +1,6 @@
+{
+  "productos": [
+    {"codigo":"FAL-001","nombre":"Producto lote A","precio":10.00,"stock":5,"categoriaId":1,"proveedorId":1},
+    {"codigo":"FAL-002","nombre":"Producto lote B","precio":20.00,"stock":5,"categoriaId":1,"proveedorId":1}
+  ]
+}

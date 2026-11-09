@@ -1,0 +1,8 @@
+{
+  "productos": [
+    {"codigo":"TEC-004","nombre":"Teclado inalámbrico","precio":29.99,"stock":15,"categoriaId":1,"proveedorId":1},
+    {"codigo":"MON-003","nombre":"Monitor 24 pulgadas","precio":149.99,"stock":8,"categoriaId":2,"proveedorId":2},
+    {"codigo":"ALT-001","nombre":"Altavoces USB","precio":18.50,"stock":10,"categoriaId":3,"proveedorId":1},
+    {"codigo":"CAB-002","nombre":"Cable HDMI 2 m","precio":7.99,"stock":40,"categoriaId":2,"proveedorId":2}
+  ]
+}

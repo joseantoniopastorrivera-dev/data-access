@@ -1,0 +1,10 @@
+{
+  "productos": [
+    {"codigo":"ssd-401","nombre":"SSD 1 TB","precio":"79.90","stock":5,"categoriaId":2,"proveedorId":1},
+    {"codigo":"RAM-402","nombre":"Memoria RAM 16 GB","precio":"abc","stock":1.5,"categoriaId":0,"proveedorId":1},
+    {"codigo":"DISCO-DURO-EXTERNO","nombre":"HD","precio":59.00,"stock":2,"categoriaId":2,"proveedorId":1},
+    {"codigo":"CAB_403","precio":3.50,"stock":-1,"categoriaId":1},
+    {"codigo":"PEN-404","nombre":null,"precio":{"valor":5},"stock":3,"categoriaId":1,"proveedorId":1},
+    "esto no es un producto"
+  ]
+}

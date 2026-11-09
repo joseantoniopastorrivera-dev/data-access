@@ -1,0 +1,6 @@
+{
+  "productos": [
+    {"codigo":"TEC-001","nombre":"Teclado USB","precio":19.95,"stock":12,"categoriaId":1,"proveedorId":1},
+    {"codigo":"RAT-002","nombre":"Ratón inalámbrico","precio":14.50,"stock":25,"categoriaId":1,"proveedorId":1}
+  ]
+}

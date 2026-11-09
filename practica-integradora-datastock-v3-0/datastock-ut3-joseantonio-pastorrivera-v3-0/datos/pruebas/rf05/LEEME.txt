@@ -1,0 +1,5 @@
+Evidencias de RF-FIC-05 generadas por la aplicación (opción 5):
+- cp_exp_01.json: tres productos exportados a JSON (CP-EXP-01).
+- cp_exp_02.xml: los mismos tres productos exportados a XML (CP-EXP-02).
+- cp_exp_04.xml y cp_exp_04_vuelta.json: catalogo_valido.json exportado a XML, reimportado y exportado otra vez a JSON con datos idénticos (CP-EXP-04).
+Las exportaciones de trabajo van a datos/salidas/, que no se sube al repositorio.
