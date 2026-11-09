@@ -4,6 +4,7 @@ import es.iesisidra.datastock.dao.CategoriaDAO;
 import es.iesisidra.datastock.dao.ProductoDAO;
 import es.iesisidra.datastock.dao.ProveedorDAO;
 import es.iesisidra.datastock.dto.ProductoDetalle;
+import es.iesisidra.datastock.jdbc.ConsultaProductoJdbc;
 import es.iesisidra.datastock.jdbc.ErroresBD;
 import es.iesisidra.datastock.modelo.Producto;
 import es.iesisidra.datastock.util.LectorConsola;
@@ -21,6 +22,8 @@ class MenuProductosBD {
     private final ProductoDAO productoDAO = new ProductoDAO();
     private final CategoriaDAO categoriaDAO = new CategoriaDAO();
     private final ProveedorDAO proveedorDAO = new ProveedorDAO();
+    /** UT3: componente reutilizable de consulta por código (opción 7.5.2). */
+    private final ConsultaProductoJdbc consultaProducto = new ConsultaProductoJdbc();
 
     // =====================================================================
     // 7.4 MANTENIMIENTO DE PRODUCTOS
@@ -219,7 +222,7 @@ class MenuProductosBD {
                         Mensajes.titulo("PRODUCTOS ALMACENADOS EN MYSQL");
                         mostrarTabla(productoDAO.listarTodos(), "No hay productos almacenados en MySQL.");
                     }
-                    case 2 -> consultarPorCodigo();
+                    case 2 -> buscarPorCodigo();
                     case 3 -> buscarPorNombre();
                     case 4 -> stockBajo();
                     default -> { }
@@ -231,6 +234,27 @@ class MenuProductosBD {
                 LectorConsola.pausar();
             }
         } while (opcion != 0);
+    }
+
+    /**
+     * 7.5.2 · Buscar producto por código, integrada en la UT3 con {@link ConsultaProductoJdbc}.
+     * <p>El menú pide y valida el código, llama al componente y presenta el resultado:
+     * [OK] y la ficha si existe, [AVISO] si no existe. Si MySQL falla, la SQLException
+     * llega a {@link #menuConsultas()}, que muestra [ERROR] con {@link ErroresBD}.</p>
+     */
+    private void buscarPorCodigo() throws SQLException {
+        Mensajes.titulo("BUSCAR PRODUCTO POR CÓDIGO");
+        Optional<String> codigo = Formulario.pedir("Código (Intro = cancelar): ", Formulario::codigoProducto);
+        if (codigo.isEmpty()) {
+            return;
+        }
+        Optional<ProductoDetalle> producto = consultaProducto.buscarPorCodigo(codigo.get());
+        if (producto.isPresent()) {
+            Mensajes.ok("Producto encontrado en MySQL.");
+            mostrarFicha(producto.get());
+        } else {
+            Mensajes.aviso("No existe ningún producto con el código " + codigo.get() + " en MySQL.");
+        }
     }
 
     private void buscarPorNombre() throws SQLException {

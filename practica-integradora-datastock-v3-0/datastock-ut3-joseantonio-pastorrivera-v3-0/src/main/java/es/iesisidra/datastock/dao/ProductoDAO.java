@@ -2,6 +2,7 @@ package es.iesisidra.datastock.dao;
 
 import es.iesisidra.datastock.config.ConexionBD;
 import es.iesisidra.datastock.dto.ProductoDetalle;
+import es.iesisidra.datastock.jdbc.ConsultaProductoJdbc;
 import es.iesisidra.datastock.modelo.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,6 @@ public class ProductoDAO {
             + "JOIN categoria c ON c.id = p.categoria_id "
             + "JOIN proveedor pr ON pr.id = p.proveedor_id ";
     private static final String TODOS = SELECT_DETALLE + "ORDER BY p.codigo";
-    private static final String POR_CODIGO = SELECT_DETALLE + "WHERE p.codigo = ?";
     private static final String POR_NOMBRE = SELECT_DETALLE + "WHERE p.nombre LIKE ? ORDER BY p.codigo";
     private static final String STOCK_INFERIOR = SELECT_DETALLE + "WHERE p.stock < ? ORDER BY p.stock, p.codigo";
     private static final String EXISTE = "SELECT 1 FROM producto WHERE codigo = ?";
@@ -35,6 +35,9 @@ public class ProductoDAO {
     private static final String ACTUALIZAR =
             "UPDATE producto SET nombre = ?, precio = ?, categoria_id = ?, proveedor_id = ? WHERE codigo = ?";
     private static final String ELIMINAR = "DELETE FROM producto WHERE codigo = ?";
+
+    /** UT3: la consulta por código está en el componente reutilizable; aquí solo se delega. */
+    private final ConsultaProductoJdbc consultaPorCodigo = new ConsultaProductoJdbc();
 
     /** @return todos los productos ordenados por código */
     public List<ProductoDetalle> listarTodos() throws SQLException {
@@ -45,15 +48,13 @@ public class ProductoDAO {
         }
     }
 
-    /** @param codigo código ya normalizado (mayúsculas) */
+    /**
+     * Lo usan 7.4 (consultar, modificar y eliminar) y 7.6/7.7 (movimientos). Desde la UT3
+     * delega en {@link ConsultaProductoJdbc}, para que la SQL no esté repetida.
+     * @param codigo código del producto
+     */
     public Optional<ProductoDetalle> buscarPorCodigo(String codigo) throws SQLException {
-        try (Connection con = ConexionBD.obtenerConexion();
-             PreparedStatement ps = con.prepareStatement(POR_CODIGO)) {
-            ps.setString(1, codigo);
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next() ? Optional.of(leer(rs)) : Optional.empty();
-            }
-        }
+        return consultaPorCodigo.buscarPorCodigo(codigo);
     }
 
     /**
