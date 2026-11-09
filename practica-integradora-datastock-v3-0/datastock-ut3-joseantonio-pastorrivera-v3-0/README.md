@@ -1,9 +1,9 @@
-# DataStock – Fase 2 (UT1 ficheros + UT2 JDBC y MySQL)
+# DataStock – Fase 3 (UT1 ficheros + UT2 JDBC y MySQL + UT3 componentes)
 
 **Alumno:** José Antonio Pastor Rivera  
 **Módulo:** Acceso a Datos · 2.º DAM · IES Isidra de Guzmán · Curso 2026–2027  
 **Lenguaje:** Java 21 · **Construcción:** Maven · **Interfaz:** consola  
-**Dependencias:** Gson 2.11.0 · MySQL Connector/J **8.4.0** · sqlite-jdbc **3.46.1.3**
+**Dependencias:** Gson 2.11.0 · MySQL Connector/J **8.4.0** · sqlite-jdbc **3.46.1.3** · JUnit **5.10.0** (solo pruebas)
 
 ## 1. ¿Qué es DataStock?
 
@@ -12,6 +12,7 @@ Aplicación de consola para que una pequeña empresa gestione su inventario. Es 
 - **UT1 (opciones 1-6):** importa catálogos JSON y XML a un inventario **en memoria**, los consulta, los exporta y los guarda serializados. Actividades aparte: XPath y RandomAccessFile.
 - **UT2 (opción 7):** trabaja con una base de datos **MySQL** real mediante **JDBC**. Mantiene categorías, proveedores y productos, registra entradas y salidas de stock con un procedimiento almacenado, consulta el historial y copia a MySQL los productos de la memoria dentro de una transacción.
 - **Actividad comparativa:** la clase independiente `DemoSQLite` usa SQLite, un gestor embebido.
+- **UT3 (componentes reutilizables):** no añade menús ni funcionalidades. La lectura del JSON (opción 2) y la búsqueda por código en MySQL (opción 7 > 5 > 2) se han extraído a dos componentes, `LectorProductosJson` y `ConsultaProductoJdbc`, que no dependen de la consola. Ver el [apartado 11](#11-ut3-componentes-reutilizables).
 
 > **Memoria y MySQL son almacenes distintos.** Importar un JSON o XML solo llena la memoria. Los productos pasan a MySQL únicamente con la opción **7.8**, que copia sin borrar ni modificar la memoria. No hay ninguna sincronización automática.
 
@@ -82,6 +83,18 @@ java -cp "target/classes;target/dependency/*" es.iesisidra.datastock.complementa
 java -cp "target/classes;target/dependency/*" es.iesisidra.datastock.complementarias.AccesoAleatorioActividad
 ```
 
+Pruebas automatizadas (JUnit 5) y documentación de la API (Javadoc), UT3:
+
+```bash
+mvn test
+```
+
+```bash
+mvn javadoc:javadoc
+```
+
+`mvn test` ejecuta los 10 tests de `src/test/java`. Los que consultan MySQL se **omiten** (no fallan) si el servidor no está disponible. `mvn javadoc:javadoc` genera la documentación HTML en `target/reports/apidocs/index.html`.
+
 También funciona `mvn exec:java` (y `-Dexec.mainClass=...` para las demás clases). En Linux/macOS el separador del classpath es `:` en lugar de `;`.
 
 **Si Maven falla con `PKIX path building failed`**, es que la red o el antivirus interceptan el HTTPS. En Windows se resuelve indicando a Java que use el almacén de certificados del sistema:
@@ -99,7 +112,7 @@ Otras opciones: `-Ddatastock.color=false` (o `NO_COLOR=1`) desactiva los colores
 | Menú | Operación | Almacén | Requisito |
 | --- | --- | --- | --- |
 | 1 | Explorar ficheros y directorios | Disco | RF-FIC-01 |
-| 2 / 3 | Importar productos desde JSON / XML | Memoria | RF-FIC-02 / 03 |
+| 2 / 3 | Importar productos desde JSON / XML (**la 2 usa `LectorProductosJson`, UT3**) | Memoria | RF-FIC-02 / 03 |
 | 4 | Consultar productos en memoria | Memoria | RF-FIC-04 |
 | 5 | Exportar productos | Memoria → disco | RF-FIC-05 |
 | 6 | Guardar y recuperar inventario (`.dat`) | Memoria ↔ disco | RF-FIC-06 |
@@ -113,7 +126,7 @@ Otras opciones: `-Ddatastock.color=false` (o `NO_COLOR=1`) desactiva los colores
 | 7.2 | Categorías: alta, listado, modificar nombre, baja | RF-JDBC-02 | `PreparedStatement`, `executeUpdate()` |
 | 7.3 | Proveedores: alta, listado, modificar nombre/email, baja | RF-JDBC-02 | `PreparedStatement`, `setNull` |
 | 7.4 | Productos: alta, consulta por código, modificación, baja | RF-JDBC-03 | `PreparedStatement`, `setBigDecimal` |
-| 7.5 | Listar (JOIN), buscar por código, por nombre (LIKE), stock < umbral | RF-JDBC-04 | `ResultSet` → DTO `ProductoDetalle` |
+| 7.5 | Listar (JOIN), buscar por código (**7.5.2 usa `ConsultaProductoJdbc`, UT3**), por nombre (LIKE), stock < umbral | RF-JDBC-04 | `ResultSet` → DTO `ProductoDetalle` |
 | 7.6 | Registrar ENTRADA o SALIDA de stock | RF-JDBC-05 | `CallableStatement` → `registrar_movimiento` |
 | 7.7 | Historial completo o por producto | RF-JDBC-06 | `ResultSet` → `MovimientoStock` |
 | 7.8 | Importar productos de memoria a MySQL | RF-JDBC-07 | Transacción: `setAutoCommit(false)`, `commit`, `rollback` |
@@ -138,13 +151,14 @@ DELETE FROM categoria WHERE id IN (9001, 9002) AND nombre LIKE 'DEMO-TX %';
 ## 7. Estructura del proyecto
 
 ```text
-datastock-ut2-joseantonio-pastorrivera-v2-0/
+datastock-ut3-joseantonio-pastorrivera-v3-0/
 ├── pom.xml · README.md · .gitignore
 ├── config/
 │   └── db.properties.example        # Plantilla sin secretos (db.properties local está en .gitignore)
 ├── datos/
 │   ├── ejemplos/ · pruebas/rf01…rf08/   # UT1
 │   ├── pruebas/ut2/                  # JSON del recorrido 6.1 y de los lotes; salidas de consola de cada CP
+│   ├── pruebas/ut3/                  # Salidas de consola de CP-COMP-01 a 03 y de la regresión
 │   ├── sqlite/                       # productos_demo.db (lo crea DemoSQLite; ignorado por Git)
 │   └── salidas/
 ├── docs/registro-de-pruebas-joseantonio-pastorrivera.docx
@@ -153,6 +167,7 @@ datastock-ut2-joseantonio-pastorrivera-v2-0/
     ├── App.java
     ├── config/ConexionBD.java        # UT2 · URL, usuario y contraseña desde entorno o db.properties
     ├── jdbc/ErroresBD.java           # UT2 · traduce SQLException a mensajes comprensibles
+    ├── jdbc/ConsultaProductoJdbc.java # UT3 · componente: busca un producto por código (opción 7.5.2)
     ├── dao/                          # UT2 · solo SQL: EsquemaDAO, CategoriaDAO, ProveedorDAO, ProductoDAO, MovimientoDAO
     ├── dto/                          # UT2 · ProductoDetalle (fila con JOIN), InfoBaseDatos
     ├── servicio/
@@ -169,15 +184,17 @@ datastock-ut2-joseantonio-pastorrivera-v2-0/
     │   ├── MenuProductosBD.java      # UT2 · 7.4 CRUD y 7.5 consultas
     │   ├── MenuStock.java            # UT2 · 7.6 movimientos y 7.7 historial
     │   └── Formulario.java · Mensajes.java   # Pedir datos validados · [OK]/[ERROR]/[AVISO]
+    ├── ficheros/LectorProductosJson.java · ResultadoLecturaJson.java   # UT3 · componente: lee y valida un JSON (opción 2)
     ├── ficheros/ · modelo/ · util/   # UT1
     └── complementarias/
         ├── DemoSQLite.java           # UT2 · actividad comparativa (main propio)
         └── XPathActividad · AccesoAleatorioActividad …   # UT1
+src/test/java/es/iesisidra/datastock/   # UT3 · JUnit 5: LectorProductosJsonTest, ConsultaProductoJdbcTest
 ```
 
 ## 8. Decisiones de diseño
 
-- **Capas separadas (§8).** Los menús (`ui`) solo piden datos y muestran resultados. Todo el SQL está en `dao`. Las operaciones con varias sentencias y transacción (`ImportadorMySQL`, `DemoTransaccion`) están en `servicio`. La formalización con interfaces llegará en la UT3.
+- **Capas separadas (§8).** Los menús (`ui`) solo piden datos y muestran resultados. Todo el SQL está en `dao`, salvo la consulta por código, que desde la UT3 está en el componente `jdbc/ConsultaProductoJdbc`. Las operaciones con varias sentencias y transacción (`ImportadorMySQL`, `DemoTransaccion`) están en `servicio`. En la UT3 dos operaciones se han convertido en componentes reutilizables (apartado 11).
 - **`PreparedStatement` siempre que interviene el usuario.** Nunca se concatena su texto en el SQL: así se evita la inyección SQL. En `LIKE`, los comodines `%` se añaden en Java y se escapan `%` y `_` del texto buscado.
 - **Validar en Java y dejar a MySQL como última barrera.** `ReglasCampos` reproduce las restricciones del script (código `^[A-Z0-9-]{1,12}$`, nombre de 3 a 100, `DECIMAL(10,2)` > 0, stock ≥ 0). Antes de insertar se comprueba que existen la categoría y el proveedor. Si aun así MySQL rechaza algo (`PRIMARY KEY`, `UNIQUE`, `CHECK`, `FOREIGN KEY`), la `SQLException` se captura y `ErroresBD` la explica. Nunca se borran registros relacionados para forzar un borrado.
 - **Dinero con `BigDecimal`** y `setBigDecimal()`/`getBigDecimal()`: sin los errores de redondeo de `double`.
@@ -226,6 +243,52 @@ Incidencias encontradas al probar y corregidas:
 | INC-07 | Un esquema mal escrito en la URL daba un error genérico 1044. | Mensaje propio: con un usuario de mínimo privilegio, MySQL responde «acceso denegado» en vez de «no existe». |
 | INC-08 | Maven no podía descargar los drivers (PKIX). | `MAVEN_OPTS=-Djavax.net.ssl.trustStoreType=Windows-ROOT` (apartado 5). |
 
-## 11. Uso de herramientas de IA
+### Pruebas de la UT3
 
-Para esta fase se ha utilizado un asistente de IA (Claude) como apoyo para el diseño, la generación del código JDBC, la ejecución de las pruebas y la redacción de la documentación. Todo el código se ha revisado, ejecutado y probado contra MySQL. Las decisiones de diseño y su justificación están documentadas en este README para poder explicarlas.
+| Caso | Datos utilizados | Resultado esperado | Resultado obtenido | Estado |
+| --- | --- | --- | --- | --- |
+| CP-COMP-01 | Opción 2 con `datos/ejemplos/catalogo_valido.json` (2 válidos) y `catalogo_con_errores.json` (1 válido, 2 inválidos) | Se cargan en memoria los productos válidos y se muestra `[OK]` | `[OK] … Productos añadidos al inventario: 2`, y después `: 1` con un `[AVISO]` y los 2 motivos. La opción 4.1 lista 3 productos | Superada |
+| CP-COMP-02 | Opción 2 con `datos/pruebas/ut3/no_existe.json` y `datos/ejemplos/catalogo_malformado.json` | Error controlado en rojo; DataStock sigue funcionando | `[ERROR] … El fichero no existe` y `[ERROR] … no es un JSON válido (línea 2, columna 1)`. El inventario no cambia y la siguiente importación funciona | Superada |
+| CP-COMP-03 | Opción 7 > 5 > 2 con `TEC-001` y `zzz-999` | Ficha correcta o aviso; sin excepciones sin controlar | `[OK]` y la ficha de TEC-001 con su categoría y su proveedor; `[AVISO] No existe … ZZZ-999`. Con MySQL inaccesible: `[ERROR]` controlado | Superada |
+
+Las salidas completas están en `datos/pruebas/ut3/` y el registro, en `docs/registro-de-pruebas-joseantonio-pastorrivera.docx`. Además, `mvn test` ejecuta 10 pruebas JUnit 5 de los dos componentes (10 superadas), y una regresión de la UT1 y la UT2 confirmó que su comportamiento no ha cambiado.
+
+## 11. UT3: componentes reutilizables
+
+**Qué se ha hecho.** Solo se han refactorizado las dos operaciones que pide el enunciado:
+
+- `LectorProductosJson` (paquete `ficheros`) recibe un `Path` y devuelve un `ResultadoLecturaJson` con los `Producto` válidos y el motivo de cada rechazado. Si el fichero no existe o el JSON es incorrecto, lanza `ImportacionException`.
+- `ConsultaProductoJdbc` (paquete `jdbc`) recibe un código y devuelve un `Optional<ProductoDetalle>`, vacío si el producto no existe. Usa `PreparedStatement`, `ResultSet` y la conexión de `ConexionBD`, y cierra todo con try-with-resources.
+
+Ninguno de los dos escribe en la consola ni lee del teclado.
+
+**¿Qué ventaja tiene separar la lectura JSON del menú? ¿Qué coste tiene?** El componente se puede reutilizar sin el menú: desde otra aplicación, desde una actividad (`AccesoAleatorioActividad` lo usa a través de `ImportadorJson`) o desde una prueba JUnit, que comprueba el resultado sin simular el teclado. Cada clase tiene una sola responsabilidad: el lector lee y valida, y el menú pregunta, añade al inventario y muestra el resultado. Un cambio en el formato del fichero no afecta a la interfaz, y un cambio en la interfaz no afecta a la lectura. El inconveniente es que hay más clases (`ResultadoLecturaJson`, el adaptador `ImportadorJson`) y el flujo cuesta más de seguir. También hay que repartir bien el trabajo. Por ejemplo, el lector no conoce el inventario, así que los productos que ya están en memoria los detecta el menú, y por eso esa incidencia ya no indica la posición en el fichero. En un programa pequeño ese coste se nota, y por eso solo se han separado las dos operaciones pedidas.
+
+**¿Por qué separar una consulta JDBC de la presentación por consola?** La consulta solo debe ocuparse de SQL y de JDBC: abrir la conexión, preparar la sentencia, convertir la fila en un objeto y cerrar los recursos. Si además imprimiera, no se podría usar desde una interfaz gráfica, una web o un test, y para cambiar un mensaje habría que tocar el acceso a datos. Como el componente devuelve un `Optional` y propaga la `SQLException`, quien lo llama decide cómo presentar el resultado. En DataStock, el menú muestra `[OK]` y la ficha, un `[AVISO]` si el producto no existe o un `[ERROR]` traducido por `ErroresBD`. Además, `ProductoDAO.buscarPorCodigo` delega en el componente, así que la sentencia SQL está en un solo sitio para 7.4, 7.5.2 y 7.6.
+
+**Herramientas utilizadas.**
+
+- **IDE** (IntelliJ IDEA o VS Code con Java): editar, compilar sobre la marcha, depurar y navegar entre clases.
+- **Maven**: gestiona las dependencias (Gson, Connector/J, JUnit), compila con Java 21 y ejecuta las pruebas en `mvn test` y `mvn package`. Con `maven-javadoc-plugin` genera también la documentación.
+- **Javadoc**: los comentarios `/** … */` de las dos clases y de sus métodos públicos (finalidad, `@param`, `@return`, `@throws`) se convierten en HTML con `mvn javadoc:javadoc`. Es la documentación de la API que necesita quien quiera reutilizar el componente sin leer su código.
+- **JUnit 5**: 10 pruebas automatizadas (`LectorProductosJsonTest` y `ConsultaProductoJdbcTest`). Entre otras cosas, comprueban que el lector no escribe nada en la consola. Las de MySQL usan `Assumptions` para omitirse si no hay servidor.
+
+**Opciones de DataStock modificadas.** Solo dos, sin añadir menús:
+
+- La **opción 2** del menú principal (Importar productos desde JSON) usa `LectorProductosJson`.
+- La **opción 7 > 5 > 2** (Buscar producto por código en MySQL) usa `ConsultaProductoJdbc`.
+
+El resto de las opciones de la UT1 y la UT2 no cambia.
+
+| CE de RA6 | Evidencia |
+| --- | --- |
+| a) Ventajas e inconvenientes | Este apartado |
+| b) Herramientas | IDE, Maven, Javadoc y JUnit (arriba) y `pom.xml` |
+| c) Componente de ficheros | `ficheros/LectorProductosJson.java` |
+| d) Componente de BD con conector | `jdbc/ConsultaProductoJdbc.java` |
+| h) Probados y documentados | CP-COMP-01 a 03 (apartado 10), JUnit en `src/test/java`, Javadoc |
+| i) Integración | Opciones 2 y 7.5.2 (`ui/MenuPrincipal.java` y `ui/MenuProductosBD.java`) |
+
+## 12. Uso de herramientas de IA
+
+Para las fases 2 y 3 se ha utilizado un asistente de IA (Claude) como apoyo para el diseño, la generación del código JDBC y de los componentes de la UT3, la ejecución de las pruebas y la redacción de la documentación. Todo el código se ha revisado, ejecutado y probado contra MySQL. Las decisiones de diseño y su justificación están documentadas en este README para poder explicarlas.
