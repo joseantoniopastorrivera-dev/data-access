@@ -9,7 +9,7 @@ datos/salidas/*
 !datos/salidas/.gitkeep
 # Material de estudio personal para la defensa (no forma parte de la entrega)
 docs/guia-completa-defensa-datastock.md
-docs/guia-defensa-datastock-ut2.md
+docs/guia-defensa-*.md
 # UT2: credenciales locales de MySQL (nunca se suben; hay una plantilla db.properties.example)
 config/db.properties
 config/crear-usuario-datastock.sql
