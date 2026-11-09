@@ -8,9 +8,10 @@ import es.iesisidra.datastock.ficheros.ExportadorJson;
 import es.iesisidra.datastock.ficheros.ExportadorXml;
 import es.iesisidra.datastock.ficheros.ImportacionException;
 import es.iesisidra.datastock.ficheros.ImportadorCatalogo;
-import es.iesisidra.datastock.ficheros.ImportadorJson;
 import es.iesisidra.datastock.ficheros.ImportadorXml;
+import es.iesisidra.datastock.ficheros.LectorProductosJson;
 import es.iesisidra.datastock.ficheros.ResultadoImportacion;
+import es.iesisidra.datastock.ficheros.ResultadoLecturaJson;
 import es.iesisidra.datastock.ficheros.SerializadorInventario;
 import es.iesisidra.datastock.modelo.Producto;
 import es.iesisidra.datastock.servicio.Inventario;
@@ -18,6 +19,7 @@ import es.iesisidra.datastock.util.ColoresConsola;
 import es.iesisidra.datastock.util.LectorConsola;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +33,8 @@ import java.util.List;
 public class MenuPrincipal {
     private final Inventario inventario;
     private final ExploradorRutas explorador = new ExploradorRutas();
-    private final ImportadorCatalogo importadorJson = new ImportadorJson();
+    /** UT3: componente reutilizable que lee y valida el JSON (opción 2). */
+    private final LectorProductosJson lectorJson = new LectorProductosJson();
     private final ImportadorCatalogo importadorXml = new ImportadorXml();
     private final ExportadorCatalogo exportadorJson = new ExportadorJson();
     private final ExportadorCatalogo exportadorXml = new ExportadorXml();
@@ -61,7 +64,7 @@ public class MenuPrincipal {
             opcion = LectorConsola.leerOpcion("Selecciona una opción: ", 0, 7);
             switch (opcion) {
                 case 1 -> explorarRuta();
-                case 2 -> importar("JSON", importadorJson);
+                case 2 -> importarJson();
                 case 3 -> importar("XML", importadorXml);
                 case 4 -> menuConsultas();
                 case 5 -> menuExportaciones();
@@ -76,7 +79,7 @@ public class MenuPrincipal {
     private void mostrarCabecera() {
         System.out.println(ColoresConsola.pintar("\n================================================", ColoresConsola.CIAN));
         System.out.println(ColoresConsola.pintar("         DATASTOCK - GESTIÓN DE INVENTARIO", ColoresConsola.NEGRITA));
-        System.out.println(ColoresConsola.pintar("           FASE 2 - UT1 + UT2 (MySQL)", ColoresConsola.CIAN));
+        System.out.println(ColoresConsola.pintar("      FASE 3 - UT1 + UT2 (MySQL) + UT3", ColoresConsola.CIAN));
         System.out.println(ColoresConsola.pintar("================================================", ColoresConsola.CIAN));
         System.out.println(ColoresConsola.pintar("Productos en memoria (UT1): " + inventario.tamano(), ColoresConsola.GRIS));
     }
@@ -90,7 +93,54 @@ public class MenuPrincipal {
     }
 
     /**
-     * RF-FIC-02 y RF-FIC-03: pide la ruta, delega la importación y muestra el resumen.
+     * Opción 2 · RF-FIC-02, integrada en la UT3 con el componente {@link LectorProductosJson}.
+     * <p>Reparto de responsabilidades: el menú pide la ruta, llama al componente, añade al
+     * inventario los productos que recibe y muestra el resultado. El componente solo lee y
+     * valida: no usa la consola ni toca el inventario. Los duplicados respecto a lo que ya hay
+     * en memoria los detecta aquí {@link Inventario#agregar}, porque dependen del inventario
+     * y no del fichero.</p>
+     */
+    private void importarJson() {
+        System.out.println("\n===== IMPORTAR JSON =====");
+        String texto = LectorConsola.leerTexto("Ruta: ");
+        try {
+            ResultadoLecturaJson lectura = lectorJson.leer(ComprobadorRutas.aRuta(texto));
+
+            List<String> incidencias = new ArrayList<>(lectura.incidencias());
+            int importados = 0;
+            for (Producto producto : lectura.productos()) {
+                if (inventario.agregar(producto)) {
+                    importados++;
+                } else {
+                    incidencias.add("Producto " + producto.getCodigo() + ": código duplicado: ya existe en el inventario");
+                }
+            }
+
+            System.out.println("Productos encontrados: " + lectura.encontrados());
+            System.out.println("Importados: " + importados + " | Rechazados: " + (lectura.encontrados() - importados));
+            if (!incidencias.isEmpty()) {
+                System.out.println("INCIDENCIAS:");
+                for (String incidencia : incidencias) {
+                    System.out.println("  - " + incidencia);
+                }
+            }
+            if (importados > 0) {
+                Mensajes.ok("Importación finalizada. Productos añadidos al inventario: " + importados + ".");
+            }
+            if (!incidencias.isEmpty()) {
+                Mensajes.aviso("Productos rechazados: " + incidencias.size() + ". Revisa las incidencias.");
+            } else if (importados == 0) {
+                Mensajes.aviso("El fichero no contiene productos. El inventario no ha cambiado.");
+            }
+        } catch (ImportacionException ex) {
+            Mensajes.error("Importación cancelada: " + ex.getMessage());
+            System.out.println("No se ha añadido ningún producto al inventario.");
+        }
+        LectorConsola.pausar();
+    }
+
+    /**
+     * RF-FIC-03 (opción 3, XML): pide la ruta, delega la importación y muestra el resumen.
      * @param formato   texto para el título ("JSON" o "XML")
      * @param importador objeto que sabe leer ese formato
      */
@@ -107,7 +157,7 @@ public class MenuPrincipal {
         LectorConsola.pausar();
     }
 
-    /** Muestra el resumen común de una importación (JSON o XML). */
+    /** Muestra el resumen de una importación XML (la opción 3 se mantiene como en la UT1). */
     private void mostrarResumen(ResultadoImportacion resultado) {
         System.out.println("Productos encontrados: " + resultado.getEncontrados());
         System.out.println("Importados: " + resultado.getImportados() + " | Rechazados: " + resultado.getRechazados());

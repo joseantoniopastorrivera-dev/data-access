@@ -19,15 +19,34 @@ public final class ComprobadorRutas {
      * @throws ImportacionException con un mensaje claro si no se puede leer
      */
     public static Path ficheroLegible(String textoRuta) throws ImportacionException {
+        return ficheroLegible(aRuta(textoRuta));
+    }
+
+    /**
+     * UT3 · Convierte el texto escrito por el usuario en un {@link Path}, sin comprobar
+     * todavía si el fichero existe (eso lo hace quien lo vaya a leer).
+     * @param textoRuta ruta escrita por el usuario
+     * @return la ruta sin espacios extremos convertida en Path
+     * @throws ImportacionException si está en blanco o contiene caracteres no válidos
+     */
+    public static Path aRuta(String textoRuta) throws ImportacionException {
         if (textoRuta == null || textoRuta.isBlank()) {
             throw new ImportacionException("Debes indicar la ruta del fichero.");
         }
-        Path ruta;
         try {
-            ruta = Path.of(textoRuta.trim());
+            return Path.of(textoRuta.trim());
         } catch (InvalidPathException ex) {
             throw new ImportacionException("La ruta contiene caracteres no válidos: " + ex.getMessage(), ex);
         }
+    }
+
+    /**
+     * UT3 · Misma comprobación para quien ya tiene un {@link Path}, como {@link LectorProductosJson}.
+     * @param ruta ruta del fichero
+     * @return la misma ruta, si se puede leer
+     * @throws ImportacionException con un mensaje claro si no existe, no es un fichero o no se puede leer
+     */
+    public static Path ficheroLegible(Path ruta) throws ImportacionException {
         if (!Files.exists(ruta)) {
             throw new ImportacionException("El fichero no existe: " + ruta.toAbsolutePath());
         }

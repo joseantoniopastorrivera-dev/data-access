@@ -9,7 +9,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * RF-FIC-03 · Importar un catálogo XML mediante DOM.
- * <p>Equivalente a {@link ImportadorJson}: solo cambia cómo se lee el documento.
+ * <p>Equivalente a la lectura de {@link LectorProductosJson}: solo cambia cómo se lee el documento.
  * La validación, los duplicados y el resumen los hace {@link ProcesoImportacion}.</p>
  */
 public class ImportadorXml implements ImportadorCatalogo {
