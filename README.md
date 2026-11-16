@@ -15,9 +15,15 @@ El repositorio está organizado por Unidades de Trabajo (UT) y prácticas integr
   * Documentación completa sobre JDBC. Incluye conceptos básicos, ejecución de sentencias DML y DDL, procesamiento de resultados, gestión de transacciones y la guía didáctica de la unidad.
 * **`practica-integradora-datastock-v1-0/`**
   * Proyecto práctico de la UT1 llamado **DataStock**. Incluye el código fuente (versión 1.0), el enunciado de la práctica, los archivos comprimidos de entrega y la plantilla de registro de pruebas (Testing).
+* **`practica-integradora-datastock-v2-0/`**
+  * Entrega de la UT2: DataStock ampliado con acceso a base de datos mediante JDBC. Proyecto Maven (`pom.xml`) con `src/`, `config/`, `datos/`, `docs/` y su propio `README.md`, más el enunciado (`practica-datastock-ut2.pdf`).
+* **`practica-integradora-datastock-v3-0/`**
+  * Entrega de la UT3, que parte de la versión de la UT2 y extrae dos componentes reutilizables: `LectorProductosJson` (opción 2 del menú) y `ConsultaProductoJdbc` (opción 7.5.2). Incluye pruebas con JUnit 5, el registro de pruebas con sus evidencias y el enunciado (`practica-datastock-ut3.pdf`).
+
+Cada versión de DataStock es un proyecto independiente con su propio `README.md`, donde se explica cómo compilarlo y ejecutarlo.
 
 ## 💻 Tecnologías y Conceptos
-* **Lenguaje principal:** Java.
+* **Lenguaje principal:** Java, con Maven y JUnit 5 en las prácticas integradoras.
 * **Persistencia:** Manejo de Ficheros de texto/binarios, Formatos de intercambio.
 * **Bases de Datos:** Conectores JDBC, SQL (DDL, DML), Control de Transacciones.
 
